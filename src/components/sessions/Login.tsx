@@ -1,7 +1,9 @@
+import { LoginContext } from "@context/app/LoginContext";
+import TokenContext from "@context/app/Token";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import * as yup from "yup";
 import Box from "../Box";
 import Button from "../buttons/Button";
@@ -12,38 +14,68 @@ import Icon from "../icon/Icon";
 import TextField from "../text-field/TextField";
 import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./SessionStyle";
+import { useMutation } from "@apollo/client";
+import { CUSTOMER_LOGIN } from "lib/graph";
+import { AuthContext } from "@context/app/Auth";
+
+function getPhoneNumber(phoneNumber: string) {
+  if (phoneNumber.charAt(0) == "0") {
+    return phoneNumber.substring(1, phoneNumber.length);
+  }
+
+  return phoneNumber;
+}
 
 const Login: React.FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
+
+  const { setToken } = useContext(TokenContext);
+  const { setIsLogin } = useContext(LoginContext);
+  const { onLogin } = useContext(AuthContext);
+
+  const [userLogin] = useMutation(CUSTOMER_LOGIN, {
+    onCompleted: (data: any) => {
+      setToken(data.customerLogin);
+      localStorage.setItem("token", data.customerLogin);
+      router.push("/");
+    },
+  });
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
   const handleFormSubmit = async (values) => {
-    router.push("/profile");
-    console.log(values);
+    // router.push("/profile");
+    // console.log(values);
+    userLogin({
+      variables: {
+        data: {
+          phoneNumber: "+855".concat(getPhoneNumber(values.phone_number)),
+          password: values.password,
+        },
+      },
+    }).catch(console.error);
+
+    // Do something
+    setIsLogin(false);
+
+    onLogin();
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
-    onSubmit: handleFormSubmit,
-    initialValues,
-    validationSchema: formSchema,
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      onSubmit: handleFormSubmit,
+      initialValues,
+      validationSchema: formSchema,
+    });
 
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large">
       <form className="content" onSubmit={handleSubmit}>
         <H3 textAlign="center" mb="0.5rem">
-          Welcome To Ecommerce
+          Welcome To Loktomninh
         </H3>
         <H5
           fontWeight="600"
@@ -57,15 +89,15 @@ const Login: React.FC = () => {
 
         <TextField
           mb="0.75rem"
-          name="email"
-          placeholder="exmple@mail.com"
-          label="Email or Phone Number"
-          type="email"
+          name="phone_number"
+          placeholder="Example: 092888168"
+          label="Phone Number"
+          type="tel"
           fullwidth
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.email || ""}
-          errorText={touched.email && errors.email}
+          value={values.phone_number || ""}
+          errorText={touched.phone_number && errors.phone_number}
         />
         <TextField
           mb="1rem"
@@ -158,7 +190,7 @@ const Login: React.FC = () => {
         </FlexBox>
       </form>
 
-      <FlexBox justifyContent="center" bg="gray.200" py="19px">
+      {/* <FlexBox justifyContent="center" bg="gray.200" py="19px">
         <SemiSpan>Forgot your password?</SemiSpan>
         <Link href="/">
           <a>
@@ -167,18 +199,18 @@ const Login: React.FC = () => {
             </H6>
           </a>
         </Link>
-      </FlexBox>
+      </FlexBox> */}
     </StyledSessionCard>
   );
 };
 
 const initialValues = {
-  email: "",
+  phone_number: "",
   password: "",
 };
 
 const formSchema = yup.object().shape({
-  email: yup.string().email("invalid email").required("${path} is required"),
+  phone_number: yup.string().required("${path} is required"),
   password: yup.string().required("${path} is required"),
 });
 

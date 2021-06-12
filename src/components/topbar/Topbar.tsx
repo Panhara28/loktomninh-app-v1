@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Container from '../Container';
-import FlexBox from '../FlexBox';
-import Icon from '../icon/Icon';
-import Image from '../Image';
-import Menu from '../Menu';
-import MenuItem from '../MenuItem';
-import NavLink from '../nav-link/NavLink';
-import { Small } from '../Typography';
-import StyledTopbar from './Topbar.style';
+import React, { useEffect, useState } from "react";
+import Container from "../Container";
+import FlexBox from "../FlexBox";
+import Icon from "../icon/Icon";
+import Image from "../Image";
+import Menu from "../Menu";
+import MenuItem from "../MenuItem";
+import NavLink from "../nav-link/NavLink";
+import { Small } from "../Typography";
+import StyledTopbar from "./Topbar.style";
 
 const Topbar: React.FC = () => {
   const [currency, setCurrency] = useState(currencyList[0]);
@@ -40,47 +40,17 @@ const Topbar: React.FC = () => {
           </div>
           <FlexBox alignItems="center">
             <Icon size="14px">phone-call</Icon>
-            <span>+88012 3456 7894</span>
+            <span>+88595477325</span>
           </FlexBox>
           <FlexBox alignItems="center" ml="20px">
             <Icon size="14px">mail</Icon>
-            <span>support@ui-lib.com</span>
+            <span>loktomninh@gmail.com.com</span>
           </FlexBox>
         </FlexBox>
         <FlexBox className="topbar-right" alignItems="center">
-          <NavLink className="link" href="/faq">
-            Theme FAQ"s
-          </NavLink>
-          <NavLink className="link" href="/help">
+          {/* <NavLink className="link" href="/help">
             Need Help?
-          </NavLink>
-          <Menu
-            direction="right"
-            handler={
-              <FlexBox
-                className="dropdown-handler"
-                alignItems="center"
-                height="40px"
-                mr="1.25rem"
-              >
-                <Image src={language.imgUrl} alt={language.title} />
-                <Small fontWeight="600">{language.title}</Small>
-                <Icon size="1rem">chevron-down</Icon>
-              </FlexBox>
-            }
-          >
-            {languageList.map((item) => (
-              <MenuItem key={item.title} onClick={handleLanguageClick(item)}>
-                <Image
-                  src={item.imgUrl}
-                  borderRadius="2px"
-                  mr="0.5rem"
-                  alt={item.title}
-                />
-                <Small fontWeight="600">{item.title}</Small>
-              </MenuItem>
-            ))}
-          </Menu>
+          </NavLink> */}
           <Menu
             direction="right"
             handler={
@@ -89,23 +59,15 @@ const Topbar: React.FC = () => {
                 alignItems="center"
                 height="40px"
               >
-                <Image src={currency.imgUrl} alt={currency.title} />
-                <Small fontWeight="600">{currency.title}</Small>
+                {/* <Image src={currency.imgUrl} alt={currency.title} /> */}
+                <Small fontWeight="600">Panhara</Small>
                 <Icon size="1rem">chevron-down</Icon>
               </FlexBox>
             }
           >
-            {currencyList.map((item) => (
-              <MenuItem key={item.title} onClick={handleCurrencyClick(item)}>
-                <Image
-                  src={item.imgUrl}
-                  borderRadius="2px"
-                  mr="0.5rem"
-                  alt={item.title}
-                />
-                <Small fontWeight="600">{item.title}</Small>
-              </MenuItem>
-            ))}
+            <MenuItem>
+              <Small fontWeight="600">Logout</Small>
+            </MenuItem>
           </Menu>
         </FlexBox>
       </Container>
@@ -115,35 +77,35 @@ const Topbar: React.FC = () => {
 
 const languageList = [
   {
-    title: 'EN',
-    imgUrl: '/assets/images/flags/usa.png',
+    title: "EN",
+    imgUrl: "/assets/images/flags/usa.png",
   },
   {
-    title: 'BN',
-    imgUrl: '/assets/images/flags/bd.png',
+    title: "BN",
+    imgUrl: "/assets/images/flags/bd.png",
   },
   {
-    title: 'HN',
-    imgUrl: '/assets/images/flags/in.png',
+    title: "HN",
+    imgUrl: "/assets/images/flags/in.png",
   },
 ];
 
 const currencyList = [
   {
-    title: 'USD',
-    imgUrl: '/assets/images/flags/usa.png',
+    title: "USD",
+    imgUrl: "/assets/images/flags/usa.png",
   },
   {
-    title: 'EUR',
-    imgUrl: '/assets/images/flags/uk.png',
+    title: "EUR",
+    imgUrl: "/assets/images/flags/uk.png",
   },
   {
-    title: 'BDT',
-    imgUrl: '/assets/images/flags/bd.png',
+    title: "BDT",
+    imgUrl: "/assets/images/flags/bd.png",
   },
   {
-    title: 'INR',
-    imgUrl: '/assets/images/flags/in.png',
+    title: "INR",
+    imgUrl: "/assets/images/flags/in.png",
   },
 ];
 

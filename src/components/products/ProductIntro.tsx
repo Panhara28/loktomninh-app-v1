@@ -144,7 +144,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 unoptimized={true}
               />
             </FlexBox>
-            <FlexBox overflow="auto">
+            <FlexBox overflow="auto" style={{ justifyContent: "center" }}>
               {sku.map((property, idx) => {
                 return (
                   <Button
