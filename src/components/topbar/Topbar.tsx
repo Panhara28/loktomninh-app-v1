@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import React from "react";
 import Container from "../Container";
 import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
@@ -10,22 +11,6 @@ import { Small } from "../Typography";
 import StyledTopbar from "./Topbar.style";
 
 const Topbar: React.FC = () => {
-  const [currency, setCurrency] = useState(currencyList[0]);
-  const [language, setLanguage] = useState(languageList[0]);
-
-  const handleCurrencyClick = (curr) => () => {
-    setCurrency(curr);
-  };
-
-  const handleLanguageClick = (lang) => () => {
-    setLanguage(lang);
-  };
-
-  useEffect(() => {
-    // get language from browser
-    // console.log(navigator.language);
-  }, []);
-
   return (
     <StyledTopbar>
       <Container
@@ -66,6 +51,13 @@ const Topbar: React.FC = () => {
             }
           >
             <MenuItem>
+              <Link href="/profile">
+                <a>
+                  <Small fontWeight="600">Profile</Small>
+                </a>
+              </Link>
+            </MenuItem>
+            <MenuItem>
               <Small fontWeight="600">Logout</Small>
             </MenuItem>
           </Menu>
@@ -74,39 +66,5 @@ const Topbar: React.FC = () => {
     </StyledTopbar>
   );
 };
-
-const languageList = [
-  {
-    title: "EN",
-    imgUrl: "/assets/images/flags/usa.png",
-  },
-  {
-    title: "BN",
-    imgUrl: "/assets/images/flags/bd.png",
-  },
-  {
-    title: "HN",
-    imgUrl: "/assets/images/flags/in.png",
-  },
-];
-
-const currencyList = [
-  {
-    title: "USD",
-    imgUrl: "/assets/images/flags/usa.png",
-  },
-  {
-    title: "EUR",
-    imgUrl: "/assets/images/flags/uk.png",
-  },
-  {
-    title: "BDT",
-    imgUrl: "/assets/images/flags/bd.png",
-  },
-  {
-    title: "INR",
-    imgUrl: "/assets/images/flags/in.png",
-  },
-];
 
 export default Topbar;
