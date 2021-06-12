@@ -10,36 +10,20 @@ import Divider from "../Divider";
 import Icon from "../icon/Icon";
 import Typography, { H5, Paragraph, Tiny } from "../Typography";
 import { StyledMiniCart } from "./MiniCartStyle";
-
+import { useCart } from "react-use-cart";
 type MiniCartProps = {
   toggleSidenav?: () => void;
 };
 
 const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
-  const { state, dispatch } = useAppContext();
-  const { cartList } = state.cart;
-
-  const handleCartAmountChange = useCallback(
-    (amount, product) => () => {
-      dispatch({
-        type: "CHANGE_CART_AMOUNT",
-        payload: {
-          ...product,
-          qty: amount,
-        },
-      });
-    },
-    []
-  );
-
-  const getTotalPrice = () => {
-    return (
-      cartList.reduce(
-        (accumulator, item) => accumulator + item.price * item.qty,
-        0
-      ) || 0
-    );
-  };
+  const {
+    totalUniqueItems,
+    items,
+    updateItemQuantity,
+    removeItem,
+    cartTotal,
+    totalItems,
+  } = useCart();
 
   return (
     <StyledMiniCart>
@@ -47,13 +31,13 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
         <FlexBox alignItems="center" m="0px 20px" height="74px">
           <Icon size="1.75rem">bag</Icon>
           <Typography fontWeight={600} fontSize="16px" ml="0.5rem">
-            {cartList.length} item
+            {totalUniqueItems} item
           </Typography>
         </FlexBox>
 
         <Divider />
 
-        {!!!cartList.length && (
+        {!!!items.length && (
           <FlexBox
             flexDirection="column"
             alignItems="center"
@@ -75,7 +59,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
             </Paragraph>
           </FlexBox>
         )}
-        {cartList.map((item: CartItem) => (
+        {items.map((item) => (
           <Fragment key={item.id}>
             <div className="cart-item">
               <FlexBox alignItems="center" flexDirection="column">
@@ -86,12 +70,14 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
                   size="none"
                   borderColor="primary.light"
                   borderRadius="300px"
-                  onClick={handleCartAmountChange(item.qty + 1, item)}
+                  onClick={() => {
+                    updateItemQuantity(item.id, item.quantity + 1);
+                  }}
                 >
                   <Icon variant="small">plus</Icon>
                 </Button>
                 <Typography fontWeight={600} fontSize="15px" my="3px">
-                  {item.qty}
+                  {item.itemTotal}
                 </Typography>
                 <Button
                   variant="outlined"
@@ -100,8 +86,10 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
                   size="none"
                   borderColor="primary.light"
                   borderRadius="300px"
-                  onClick={handleCartAmountChange(item.qty - 1, item)}
-                  disabled={item.qty === 1}
+                  disabled={item.quantity === 1}
+                  onClick={() => {
+                    updateItemQuantity(item.id, item.quantity - 1);
+                  }}
                 >
                   <Icon variant="small">minus</Icon>
                 </Button>
@@ -110,24 +98,26 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               <Link href={`/product/${item.id}`}>
                 <a>
                   <Avatar
-                    src={item.imgUrl || "/assets/images/products/iphone-x.png"}
+                    src={
+                      item.image_url || "/assets/images/products/iphone-x.png"
+                    }
                     mx="1rem"
-                    alt={item.name}
+                    alt={item.product_name}
                     size={76}
                   />
                 </a>
               </Link>
 
               <div className="product-details">
-                <Link href={`/product/${item.id}`}>
+                <Link href={`/product/${item.slug}`}>
                   <a>
                     <H5 className="title" fontSize="14px">
-                      {item.name}
+                      {item.product_name}
                     </H5>
                   </a>
                 </Link>
                 <Tiny color="text.muted">
-                  ${item.price.toFixed(2)} x {item.qty}
+                  ${Number(item.price).toFixed(2)} x {item.quantity}
                 </Tiny>
                 <Typography
                   fontWeight={600}
@@ -135,7 +125,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
                   color="primary.main"
                   mt="4px"
                 >
-                  ${(item.qty * item.price).toFixed(2)}
+                  ${(Number(item.quantity) * Number(item.price)).toFixed(2)}
                 </Typography>
               </div>
 
@@ -143,7 +133,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
                 className="clear-icon"
                 size="1rem"
                 ml="1.25rem"
-                onClick={handleCartAmountChange(0, item)}
+                onClick={() => removeItem(item.id)}
               >
                 close
               </Icon>
@@ -153,7 +143,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
         ))}
       </div>
 
-      {!!cartList.length && (
+      {!!items.length && (
         <Fragment>
           <Link href="/checkout">
             <Button
@@ -163,7 +153,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               onClick={toggleSidenav}
             >
               <Typography fontWeight={600}>
-                Checkout Now (${getTotalPrice().toFixed(2)})
+                Checkout Now (${cartTotal.toFixed(2)})
               </Typography>
             </Button>
           </Link>

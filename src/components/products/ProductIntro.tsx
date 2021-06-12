@@ -12,48 +12,120 @@ import Grid from "../grid/Grid";
 import Icon from "../icon/Icon";
 import Rating from "../rating/Rating";
 import { H1, H2, H3, H6, SemiSpan } from "../Typography";
+import { useCart } from "react-use-cart";
 
 export interface ProductIntroProps {
-  imgUrl?: string[];
-  title: string;
-  price: number;
+  properties?: any[];
+  product_name: string;
   id?: string | number;
 }
 
 const ProductIntro: React.FC<ProductIntroProps> = ({
-  imgUrl,
-  title,
-  price = 200,
+  product_name,
+  properties,
   id,
 }) => {
-  const [selectedImage, setSelectedImage] = useState(0);
-  const { state, dispatch } = useAppContext();
-  const cartList: CartItem[] = state.cart.cartList;
   const router = useRouter();
+  const { addItem, inCart, updateItemQuantity, items } = useCart();
   const routerId = router.query.id as string;
-  const cartItem = cartList.find(
-    (item) => item.id === id || item.id === routerId
+  const images = properties.map((x) => x.image_url);
+  const minPrice = Math.min(...properties.map((x) => Number(x.price)));
+  const maxPrice = Math.max(...properties.map((x) => Number(x.price)));
+  const priceRange =
+    minPrice === maxPrice
+      ? minPrice.toFixed(2)
+      : `${minPrice.toFixed(2)}$ - ${maxPrice.toFixed(2)}`;
+  const [price, setPrice] = useState(priceRange);
+  const [image, setImage] = useState(images[0]);
+  const [optionIdx, setOptionIdx] = useState(0);
+  const [activeClass, setActiveClass] = useState(true);
+  const alreadyAddToCart = inCart(
+    properties[optionIdx === -1 ? 0 : optionIdx].id
   );
 
-  const handleImageClick = (ind) => () => {
-    setSelectedImage(ind);
+  const [sku, setSku] = useState(
+    properties.map((x) => {
+      const index = items.findIndex((item) => item.id === x.id);
+      return {
+        ...x,
+        qty: Number(items[index]?.quantity || 0),
+      };
+    })
+  );
+
+  const onChangeImage = (idx, optionIdx, price, image_url) => {
+    setOptionIdx(idx);
+    setPrice(Number(price).toFixed(2));
+    setActiveClass(optionIdx === idx);
+    setImage(image_url);
   };
 
-  const handleCartAmountChange = useCallback(
-    (amount) => () => {
-      dispatch({
-        type: "CHANGE_CART_AMOUNT",
-        payload: {
-          qty: amount,
-          name: title,
-          price,
-          imgUrl: imgUrl[0],
-          id: id || routerId,
-        },
-      });
-    },
-    []
-  );
+  const RenderAddToCart = ({ index }: { index: number }) => {
+    return (
+      <>
+        {!alreadyAddToCart ? (
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            mb="36px"
+            mt="36px"
+            onClick={() => {
+              addItem(properties[optionIdx === -1 ? 0 : optionIdx], 1);
+              const items = [...sku];
+              items[index].qty = 1;
+              setSku(items);
+            }}
+          >
+            Add to Cart
+          </Button>
+        ) : (
+          <FlexBox alignItems="center" mb="36px" mt="32px">
+            <Button
+              p="9px"
+              variant="outlined"
+              size="small"
+              color="primary"
+              onClick={() => {
+                const items = [...sku];
+                items[index].qty--;
+                setSku(items);
+
+                items[index].qty === 1
+                  ? null
+                  : updateItemQuantity(
+                      properties[optionIdx === -1 ? 0 : optionIdx].id,
+                      items[index].qty === 1 ? 0 : items[index].qty
+                    );
+              }}
+            >
+              <Icon variant="small">minus</Icon>
+            </Button>
+            <H3 fontWeight="600" mx="20px">
+              {sku[index].qty}
+            </H3>
+            <Button
+              p="9px"
+              variant="outlined"
+              size="small"
+              color="primary"
+              onClick={() => {
+                const items = [...sku];
+                items[index].qty++;
+                setSku(items);
+                updateItemQuantity(
+                  properties[optionIdx === -1 ? 0 : optionIdx].id,
+                  items[index].qty
+                );
+              }}
+            >
+              <Icon variant="small">plus</Icon>
+            </Button>
+          </FlexBox>
+        )}
+      </>
+    );
+  };
 
   return (
     <Box overflow="hidden">
@@ -62,124 +134,64 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
           <Box>
             <FlexBox justifyContent="center" mb="50px">
               <LazyImage
-                src={imgUrl[selectedImage]}
-                alt={title}
+                src={image}
+                alt={product_name}
                 height="300px"
                 width="auto"
                 loading="eager"
                 objectFit="contain"
+                priority={true}
+                unoptimized={true}
               />
             </FlexBox>
             <FlexBox overflow="auto">
-              {imgUrl.map((url, ind) => (
-                <Box
-                  size={70}
-                  minWidth={70}
-                  bg="white"
-                  borderRadius="10px"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  cursor="pointer"
-                  border="1px solid"
-                  key={ind}
-                  ml={ind === 0 && "auto"}
-                  mr={ind === imgUrl.length - 1 ? "auto" : "10px"}
-                  borderColor={
-                    selectedImage === ind ? "primary.main" : "gray.400"
-                  }
-                  onClick={handleImageClick(ind)}
-                >
-                  <Avatar src={url} borderRadius="10px" size={40} />
-                </Box>
-              ))}
+              {sku.map((property, idx) => {
+                return (
+                  <Button
+                    className="button-link"
+                    variant="contained"
+                    color="primary"
+                    p="1rem 1.5rem"
+                    mr="1rem"
+                    onClick={() =>
+                      onChangeImage(
+                        idx,
+                        optionIdx,
+                        property.price,
+                        property.image_url
+                      )
+                    }
+                  >
+                    {property.property}
+                  </Button>
+                );
+              })}
             </FlexBox>
           </Box>
         </Grid>
 
         <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb="1rem">{title}</H1>
-
-          <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Brand:</SemiSpan>
-            <H6 ml="8px">Ziaomi</H6>
-          </FlexBox>
-
-          <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Rated:</SemiSpan>
-            <Box ml="8px" mr="8px">
-              <Rating color="warn" value={4} outof={5} />
-            </Box>
-            <H6>(50)</H6>
-          </FlexBox>
+          <H1 mb="1rem">{product_name}</H1>
 
           <Box mb="24px">
             <H2 color="primary.main" mb="4px" lineHeight="1">
-              ${price.toFixed(2)}
+              {price}$
             </H2>
+
+            {sku.map((x, index) => {
+              if (optionIdx !== index) return <div />;
+              return (
+                <div key={index}>
+                  <RenderAddToCart index={index} />
+                </div>
+              );
+            })}
             <SemiSpan color="inherit">Stock Available</SemiSpan>
           </Box>
-
-          {!cartItem?.qty ? (
-            <Button
-              variant="contained"
-              size="small"
-              color="primary"
-              mb="36px"
-              onClick={handleCartAmountChange(1)}
-            >
-              Add to Cart
-            </Button>
-          ) : (
-            <FlexBox alignItems="center" mb="36px">
-              <Button
-                p="9px"
-                variant="outlined"
-                size="small"
-                color="primary"
-                onClick={handleCartAmountChange(cartItem?.qty - 1)}
-              >
-                <Icon variant="small">minus</Icon>
-              </Button>
-              <H3 fontWeight="600" mx="20px">
-                {cartItem?.qty.toString().padStart(2, "0")}
-              </H3>
-              <Button
-                p="9px"
-                variant="outlined"
-                size="small"
-                color="primary"
-                onClick={handleCartAmountChange(cartItem?.qty + 1)}
-              >
-                <Icon variant="small">plus</Icon>
-              </Button>
-            </FlexBox>
-          )}
-
-          <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Sold By:</SemiSpan>
-            <Link href="/shop/fdfdsa">
-              <a>
-                <H6 lineHeight="1" ml="8px">
-                  Mobile Store
-                </H6>
-              </a>
-            </Link>
-          </FlexBox>
         </Grid>
       </Grid>
     </Box>
   );
-};
-
-ProductIntro.defaultProps = {
-  imgUrl: [
-    "/assets/images/products/headphone.png",
-    "/assets/images/products/hiclipart.com (16).png",
-    "/assets/images/products/hiclipart.com (18).png",
-  ],
-  title: "Mi Note 11 Pro",
-  price: 1100,
 };
 
 export default ProductIntro;

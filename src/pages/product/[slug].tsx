@@ -8,13 +8,15 @@ import ProductIntro from "@component/products/ProductIntro";
 import ProductReview from "@component/products/ProductReview";
 import RelatedProducts from "@component/products/RelatedProducts";
 import { H5 } from "@component/Typography";
+import { GET_PRODUCT } from "lib/graph";
 import React, { useState } from "react";
-
-const ProductDetails = () => {
-  const state = {
-    title: "Mi Note 11 Pro",
-    price: 1135,
-  };
+import { useQuery } from "@apollo/client";
+const ProductDetails = ({ slug }) => {
+  const { data, loading } = useQuery(GET_PRODUCT, {
+    variables: {
+      slug,
+    },
+  });
 
   const [selectedOption, setSelectedOption] = useState("description");
 
@@ -22,9 +24,11 @@ const ProductDetails = () => {
     setSelectedOption(opt);
   };
 
+  if (loading || data === undefined) return <div></div>;
+
   return (
     <div>
-      <ProductIntro {...state} />
+      <ProductIntro {...data.clientProductDetail} />
 
       <FlexBox
         borderBottom="1px solid"
@@ -45,31 +49,24 @@ const ProductDetails = () => {
         >
           Description
         </H5>
-        <H5
-          className="cursor-pointer"
-          p="4px 10px"
-          color={selectedOption === "review" ? "primary.main" : "text.muted"}
-          onClick={handleOptionClick("review")}
-          borderBottom={selectedOption === "review" && "2px solid"}
-          borderColor="primary.main"
-        >
-          Review (3)
-        </H5>
       </FlexBox>
 
       <Box mb="50px">
-        {selectedOption === "description" && <ProductDescription />}
-        {selectedOption === "review" && <ProductReview />}
+        {selectedOption === "description" && (
+          <ProductDescription
+            description={data.clientProductDetail.description}
+          />
+        )}
       </Box>
-
-      <FrequentlyBought />
-
-      <AvailableShops />
-
-      <RelatedProducts />
     </div>
   );
 };
+
+export function getServerSideProps(params) {
+  const slug = params.query;
+
+  return { props: slug };
+}
 
 ProductDetails.layout = NavbarLayout;
 

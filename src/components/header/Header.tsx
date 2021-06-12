@@ -15,13 +15,14 @@ import Sidenav from "../sidenav/Sidenav";
 import { Tiny } from "../Typography";
 import StyledHeader from "./HeaderStyle";
 import UserLoginDialog from "./UserLoginDialog";
-
+import { useCart } from "react-use-cart";
 type HeaderProps = {
   isFixed?: boolean;
   className?: string;
 };
 
 const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
+  const { totalUniqueItems, items } = useCart();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
   const { state } = useAppContext();
@@ -33,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
         <Icon size="20px">bag</Icon>
       </IconButton>
 
-      {!!cartList.length && (
+      {!!items.length && (
         <FlexBox
           borderRadius="300px"
           bg="error.main"
@@ -45,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
           mt="-9px"
         >
           <Tiny color="white" fontWeight="600">
-            {cartList.length}
+            {totalUniqueItems}
           </Tiny>
         </FlexBox>
       )}
