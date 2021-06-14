@@ -51,7 +51,7 @@ const Topbar: React.FC = () => {
             }
           >
             <MenuItem>
-              <Link href="/profile">
+              <Link href="/profile/edit">
                 <a>
                   <Small fontWeight="600">Profile</Small>
                 </a>

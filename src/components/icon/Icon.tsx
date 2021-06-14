@@ -14,8 +14,6 @@ export interface IconProps {
 
 const Icon: React.FC<IconProps & SpaceProps & ButtonHTMLAttributes<IconProps>> =
   ({ children, ...props }: IconProps) => {
-    console.log(children);
-
     return (
       <StyledIcon
         src={`/assets/images/icons/${children}.svg`}

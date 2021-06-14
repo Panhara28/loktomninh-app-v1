@@ -54,40 +54,16 @@ const linkList = [
         iconName: "bag",
         count: 5,
       },
-      {
-        href: "/wish-list",
-        title: "Wishlist",
-        iconName: "heart",
-        count: 19,
-      },
-      {
-        href: "/support-tickets",
-        title: "Support Tickets",
-        iconName: "customer-service",
-        count: 1,
-      },
     ],
   },
   {
     title: "ACCOUNT SETTINGS",
     list: [
       {
-        href: "/profile",
+        href: "/profile/edit",
         title: "Profile Info",
         iconName: "user",
         count: 3,
-      },
-      {
-        href: "/address",
-        title: "Addresses",
-        iconName: "pin",
-        count: 16,
-      },
-      {
-        href: "/payment-methods",
-        title: "Payment Methods",
-        iconName: "credit-card",
-        count: 4,
       },
     ],
   },

@@ -59,7 +59,7 @@ export function DeliveryForm({ input, setInput, isShow }: Props) {
               ></AddressInput>
 
               <AddressStatus>
-                {location.active ? "Home" : "Other"}
+                {location.active ? "Primary" : "Other"}
               </AddressStatus>
             </DeliveryAddressInput>
           );

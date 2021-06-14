@@ -46,7 +46,7 @@ const Login: React.FC = () => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = (values) => {
     // router.push("/profile");
     // console.log(values);
     userLogin({

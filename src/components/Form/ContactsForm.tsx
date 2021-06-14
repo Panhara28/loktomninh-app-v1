@@ -63,7 +63,7 @@ export function ContactsForm({ input, setInput, isShow }: Props) {
                 ></ContactInput>
 
                 <ContactStatus>
-                  {contact.active ? "Primary" : "Secondary"}
+                  {contact.active ? "Primary" : "Other"}
                 </ContactStatus>
               </ContactNumberInput>
             </>

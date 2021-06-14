@@ -212,7 +212,7 @@ export const ContactNumberInput = styled.div`
 
   &.active {
     background-color: #ffff;
-    border: 1px solid #e94560;
+    border: 2px solid #e94560;
   }
 
   :hover {
@@ -223,12 +223,11 @@ export const ContactNumberInput = styled.div`
 export const ContactInput = styled.input`
   width: 85%;
   position: absolute;
-  top: 40px;
+  padding-top: 30px;
   left: 12px;
   border: 0;
   size: 16px;
   font-size: 18px;
-  padding-top: 10px;
   background: none;
   &:focus {
     outline: none;
@@ -249,7 +248,7 @@ export const ContactNumber = styled.p`
 `;
 
 export const AddContactBtn = styled.div`
-  color: rgb(0, 158, 127);
+  color: #e94560;
   display: flex;
   flex-direction: row;
   justify-content: center;

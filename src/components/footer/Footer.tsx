@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                 <AppStore />
               </Grid>
 
-              <Grid item lg={2} md={6} sm={6} xs={12}>
+              {/* <Grid item lg={2} md={6} sm={6} xs={12}>
                 <Typography
                   fontSize="25px"
                   fontWeight="600"
@@ -67,9 +67,9 @@ const Footer: React.FC = () => {
                     </Link>
                   ))}
                 </div>
-              </Grid>
+              </Grid> */}
 
-              <Grid item lg={3} md={6} sm={6} xs={12}>
+              {/* <Grid item lg={3} md={6} sm={6} xs={12}>
                 <Typography
                   fontSize="25px"
                   fontWeight="600"
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                     </Link>
                   ))}
                 </div>
-              </Grid>
+              </Grid> */}
 
               <Grid item lg={3} md={6} sm={6} xs={12}>
                 <Typography
