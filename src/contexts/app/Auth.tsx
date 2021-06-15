@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_CUSTOMER_LOGGED } from "lib/graph";
 import { useRouter } from "next/router";
-import LoginPage from "pages/login";
 import React, { createContext, useContext } from "react";
 
 export const AuthContext = createContext<{ customer?: any; onLogin: any }>({

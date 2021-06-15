@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCT_LIST } from "lib/graph";
 
 const Section5: React.FC = () => {
-  const { loading, data, fetchMore, error } = useQuery(GET_PRODUCT_LIST, {
+  const { loading, data } = useQuery(GET_PRODUCT_LIST, {
     variables: {
       limit: 20,
       offset: 1,

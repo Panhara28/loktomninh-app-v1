@@ -13,7 +13,6 @@ export interface ProductCard2Props {
 
 const ProductCard2: React.FC<ProductCard2Props> = ({
   product_name,
-  properties,
   image,
   slug,
 }) => {

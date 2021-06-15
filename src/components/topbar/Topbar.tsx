@@ -3,10 +3,8 @@ import React from "react";
 import Container from "../Container";
 import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
-import Image from "../Image";
 import Menu from "../Menu";
 import MenuItem from "../MenuItem";
-import NavLink from "../nav-link/NavLink";
 import { Small } from "../Typography";
 import StyledTopbar from "./Topbar.style";
 

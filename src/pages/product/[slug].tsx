@@ -1,12 +1,8 @@
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import NavbarLayout from "@component/layout/NavbarLayout";
-import AvailableShops from "@component/products/AvailableShops";
-import FrequentlyBought from "@component/products/FrequentlyBought";
 import ProductDescription from "@component/products/ProductDescription";
 import ProductIntro from "@component/products/ProductIntro";
-import ProductReview from "@component/products/ProductReview";
-import RelatedProducts from "@component/products/RelatedProducts";
 import { H5 } from "@component/Typography";
 import { GET_PRODUCT } from "lib/graph";
 import React, { useState } from "react";

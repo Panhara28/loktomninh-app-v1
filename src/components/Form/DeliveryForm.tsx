@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import {
   AddAddressBtn,
-  Address,
   AddressInput,
   AddressStatus,
   DeliveryAddressInput,
@@ -21,7 +20,7 @@ export function DeliveryForm({ input, setInput, isShow }: Props) {
     setInput(values);
   };
 
-  const handleSetPrimary = (idx, e) => {
+  const handleSetPrimary = (idx) => {
     let values = [...input];
 
     values = values.map((x) => {
@@ -47,7 +46,7 @@ export function DeliveryForm({ input, setInput, isShow }: Props) {
         input.map((location, idx) => {
           return (
             <DeliveryAddressInput
-              onClick={(e) => handleSetPrimary(idx, e)}
+              onClick={() => handleSetPrimary(idx)}
               className={location.active ? "active" : ""}
             >
               <AddressInput

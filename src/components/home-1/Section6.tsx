@@ -1,5 +1,4 @@
 import LazyImage from "@component/LazyImage";
-import productDatabase from "@data/product-database";
 import React, { useState } from "react";
 import Box from "../Box";
 import CategorySectionHeader from "../CategorySectionHeader";
@@ -7,7 +6,6 @@ import Container from "../Container";
 import FlexBox from "../FlexBox";
 import Grid from "../grid/Grid";
 import Hidden from "../hidden/Hidden";
-import ProductCard1 from "../product-cards/ProductCard1";
 import StyledProductCategory from "./ProductCategoryStyle";
 
 const Section6: React.FC = () => {
@@ -62,11 +60,11 @@ const Section6: React.FC = () => {
         <Box flex="1 1 0" minWidth="0px">
           <CategorySectionHeader title="Cars" seeMoreLink="#" />
           <Grid container spacing={6}>
-            {productDatabase.slice(0, 6).map((item, ind) => (
+            {/* {productDatabase.slice(0, 6).map((item, ind) => (
               <Grid item lg={4} sm={6} xs={12} key={ind}>
                 <ProductCard1 hoverEffect {...item} />
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </Box>
       </FlexBox>

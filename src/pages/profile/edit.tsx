@@ -16,17 +16,11 @@ import Hidden from "@component/hidden/Hidden";
 import Icon from "@component/icon/Icon";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
-import TextField from "@component/text-field/TextField";
-import { Formik, useFormik } from "formik";
 import { GET_CUSTOMER_LOGGED, UPDATE_CUSTOMER } from "lib/graph";
-import { values } from "lodash";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useCart } from "react-use-cart";
-import * as yup from "yup";
 
 const ProfileEditor = () => {
-  const { isEmpty } = useCart();
   let nameDisplayInput;
 
   const [contacts, setContacts] = useState([
@@ -57,7 +51,7 @@ const ProfileEditor = () => {
     },
   });
 
-  const [updateCustomer, { error }] = useMutation(UPDATE_CUSTOMER, {
+  const [updateCustomer] = useMutation(UPDATE_CUSTOMER, {
     onCompleted: () => {
       window.location.reload();
     },

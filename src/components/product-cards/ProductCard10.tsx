@@ -9,7 +9,6 @@ import { Chip } from "../Chip";
 import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
 import Modal from "../modal/Modal";
-import ProductIntro from "../products/ProductIntro";
 import { H3, SemiSpan } from "../Typography";
 import { StyledProductCard1 } from "./ProductCardStyle";
 
@@ -186,7 +185,7 @@ const ProductCard10: React.FC<ProductCard10Props> = ({
 
       <Modal open={open} onClose={toggleDialog}>
         <Card p="1rem" position="relative">
-          <ProductIntro imgUrl={[imgUrl]} title={title} price={price} />
+          {/* <ProductIntro imgUrl={[imgUrl]} title={title} price={price} /> */}
           <Box
             position="absolute"
             top="0.75rem"

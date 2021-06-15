@@ -1,19 +1,12 @@
 import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
-import Card from "@component/Card";
 import FlexBox from "@component/FlexBox";
-import LazyImage from "@component/LazyImage";
-import TextField from "@component/text-field/TextField";
-import { format } from "date-fns";
-import { Formik } from "formik";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import * as yup from "yup";
+import React, { useState } from "react";
 import Button from "../buttons/Button";
 import { Card1 } from "../Card1";
 import Grid from "../grid/Grid";
-import Select from "../Select";
-import Typography, { H6, Paragraph, Span } from "../Typography";
+import Typography, { Span } from "../Typography";
 import { useMutation, useQuery } from "@apollo/client";
 import { useCart } from "react-use-cart";
 import { CHECKOUT, GET_CUSTOMER_LOGGED } from "lib/graph";
@@ -35,7 +28,7 @@ const CheckoutForm2 = () => {
   }
 
   const [checkout] = useMutation(CHECKOUT, {
-    onCompleted: (data) => {
+    onCompleted: () => {
       alert("Order Completed");
       emptyCart();
     },

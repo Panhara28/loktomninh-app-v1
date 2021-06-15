@@ -1,20 +1,16 @@
 import IconButton from "@component/buttons/IconButton";
 import Image from "@component/Image";
-import { useAppContext } from "@context/app/AppContext";
 import Link from "next/link";
 import React, { useState } from "react";
-import Box from "../Box";
 import Categories from "../categories/Categories";
 import Container from "../Container";
 import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
 import MiniCart from "../mini-cart/MiniCart";
 import SearchBox from "../search-box/SearchBox";
-import Login from "../sessions/Login";
 import Sidenav from "../sidenav/Sidenav";
 import { Tiny } from "../Typography";
 import StyledHeader from "./HeaderStyle";
-import UserLoginDialog from "./UserLoginDialog";
 import { useCart } from "react-use-cart";
 type HeaderProps = {
   isFixed?: boolean;
@@ -25,8 +21,6 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
   const { totalUniqueItems, items } = useCart();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
-  const { state } = useAppContext();
-  const { cartList } = state.cart;
 
   const cartHandle = (
     <FlexBox ml="20px" alignItems="flex-start">

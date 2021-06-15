@@ -1,17 +1,11 @@
 import LazyImage from "@component/LazyImage";
-import { useAppContext } from "@context/app/AppContext";
-import { CartItem } from "@reducer/cartReducer";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
-import Avatar from "../avatar/Avatar";
+import React, { useState } from "react";
 import Box from "../Box";
 import Button from "../buttons/Button";
 import FlexBox from "../FlexBox";
 import Grid from "../grid/Grid";
 import Icon from "../icon/Icon";
-import Rating from "../rating/Rating";
-import { H1, H2, H3, H6, SemiSpan } from "../Typography";
+import { H1, H2, H3, SemiSpan } from "../Typography";
 import { useCart } from "react-use-cart";
 
 export interface ProductIntroProps {
@@ -23,11 +17,8 @@ export interface ProductIntroProps {
 const ProductIntro: React.FC<ProductIntroProps> = ({
   product_name,
   properties,
-  id,
 }) => {
-  const router = useRouter();
   const { addItem, inCart, updateItemQuantity, items } = useCart();
-  const routerId = router.query.id as string;
   const images = properties.map((x) => x.image_url);
   const minPrice = Math.min(...properties.map((x) => Number(x.price)));
   const maxPrice = Math.max(...properties.map((x) => Number(x.price)));
@@ -38,7 +29,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
   const [price, setPrice] = useState(priceRange);
   const [image, setImage] = useState(images[0]);
   const [optionIdx, setOptionIdx] = useState(0);
-  const [activeClass, setActiveClass] = useState(true);
+  const [, setActiveClass] = useState(true);
   const alreadyAddToCart = inCart(
     properties[optionIdx === -1 ? 0 : optionIdx].id
   );
@@ -178,7 +169,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
               {price}$
             </H2>
 
-            {sku.map((x, index) => {
+            {sku.map((_, index) => {
               if (optionIdx !== index) return <div />;
               return (
                 <div key={index}>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import Carousel from "../carousel/Carousel";
 import CategorySectionCreator from "../CategorySectionCreator";
-import ProductCard1 from "../product-cards/ProductCard1";
 
 const Section2: React.FC = () => {
   const [visibleSlides, setVisibleSlides] = useState(4);
@@ -24,56 +23,22 @@ const Section2: React.FC = () => {
     >
       <Box mt="-0.25rem" mb="-0.25rem">
         <Carousel totalSlides={10} visibleSlides={visibleSlides}>
-          {productList.map((item, ind) => (
+          {/* {productList.map((item, ind) => (
             <Box py="0.25rem" key={ind}>
               <ProductCard1
                 id={ind}
-                imgUrl={item.imgUrl}
-                title="Smart watch black"
-                rating={4}
-                price={250}
-                off={56}
+                image={item.image}
                 key={ind}
+                product_name={item.product_name}
+                properties={item.properties}
+                slug={item.slug}
               />
             </Box>
-          ))}
+          ))} */}
         </Carousel>
       </Box>
     </CategorySectionCreator>
   );
 };
-
-const productList = [
-  {
-    imgUrl: "/assets/images/products/flash-1.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-2.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-3.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-4.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-1.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-2.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-3.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-4.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-1.png",
-  },
-  {
-    imgUrl: "/assets/images/products/flash-2.png",
-  },
-];
 
 export default Section2;

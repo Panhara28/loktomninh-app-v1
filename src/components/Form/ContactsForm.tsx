@@ -3,7 +3,6 @@ import React from "react";
 import {
   AddContactBtn,
   ContactInput,
-  ContactNumber,
   ContactNumberInput,
   ContactStatus,
 } from "./profile.styled";
@@ -21,7 +20,7 @@ export function ContactsForm({ input, setInput, isShow }: Props) {
     setInput(values);
   };
 
-  const handleSetPrimary = (idx, e) => {
+  const handleSetPrimary = (idx) => {
     let values = [...input];
 
     values = values.map((x) => {
@@ -50,7 +49,7 @@ export function ContactsForm({ input, setInput, isShow }: Props) {
             <>
               <ContactNumberInput
                 className={contact.active ? "active" : ""}
-                onClick={(e) => handleSetPrimary(idx, e)}
+                onClick={() => handleSetPrimary(idx)}
                 id={`contact-${contact.id}`}
               >
                 <ContactInput

@@ -16,6 +16,7 @@ export interface ProductCard1Props extends CardProps {
   properties: any[];
   slug: string;
   image: any[];
+  id: number;
 }
 
 const ProductCard1: React.FC<ProductCard1Props> = ({
@@ -23,6 +24,7 @@ const ProductCard1: React.FC<ProductCard1Props> = ({
   properties,
   image,
   slug,
+  id,
   ...props
 }) => {
   const primaryImage = image?.filter((image) => image.isPrimary === true)[0];

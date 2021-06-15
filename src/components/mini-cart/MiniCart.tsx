@@ -1,10 +1,8 @@
 import Avatar from "@component/avatar/Avatar";
 import FlexBox from "@component/FlexBox";
 import LazyImage from "@component/LazyImage";
-import { useAppContext } from "@context/app/AppContext";
-import { CartItem } from "@reducer/cartReducer";
 import Link from "next/link";
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment } from "react";
 import Button from "../buttons/Button";
 import Divider from "../Divider";
 import Icon from "../icon/Icon";
@@ -16,14 +14,8 @@ type MiniCartProps = {
 };
 
 const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
-  const {
-    totalUniqueItems,
-    items,
-    updateItemQuantity,
-    removeItem,
-    cartTotal,
-    totalItems,
-  } = useCart();
+  const { totalUniqueItems, items, updateItemQuantity, removeItem, cartTotal } =
+    useCart();
 
   return (
     <StyledMiniCart>

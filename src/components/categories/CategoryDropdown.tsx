@@ -1,9 +1,6 @@
-import navigations from "@data/navigations";
 import React from "react";
 import CategoryMenuItem from "./category-menu-item/CategoryMenuItem";
 import { StyledCategoryDropdown } from "./CategoryDropdownStyle";
-import MegaMenu1 from "./mega-menu/MegaMenu1";
-import MegaMenu2 from "./mega-menu/MegaMenu2";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORY_LIST } from "lib/graph";
 export interface CategoryDropdownProps {

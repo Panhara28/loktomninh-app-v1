@@ -2,26 +2,12 @@ import AppStore from "@component/AppStore";
 import Image from "@component/Image";
 import Link from "next/link";
 import React from "react";
-import styled from "styled-components";
-import { getTheme } from "../../utils/utils";
 import Box from "../Box";
 import Container from "../Container";
 import FlexBox from "../FlexBox";
 import Grid from "../grid/Grid";
 import Icon from "../icon/Icon";
 import Typography, { Paragraph } from "../Typography";
-
-const StyledLink = styled.a`
-  position: relative;
-  display: block;
-  padding: 0.3rem 0rem;
-  color: ${getTheme("colors.gray.500")};
-  cursor: pointer;
-  border-radius: 4px;
-  :hover {
-    color: ${getTheme("colors.gray.100")};
-  }
-`;
 
 const Footer: React.FC = () => {
   return (
@@ -137,22 +123,6 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
-const aboutLinks = [
-  "Careers",
-  "Our Stores",
-  "Our Cares",
-  "Terms & Conditions",
-  "Privacy Policy",
-];
-
-const customerCareLinks = [
-  "Help Center",
-  "How to Buy",
-  "Track Your Order",
-  "Corporate & Bulk Purchasing",
-  "Returns & Refunds",
-];
 
 const iconList = [
   { iconName: "facebook", url: "https://www.facebook.com/UILibOfficial" },
