@@ -26,7 +26,6 @@ const App = ({ Component, pageProps }: any) => {
     process.browser ? localStorage.getItem("token") : null
   );
   const [isLogin, setIsLogin] = useState(false);
-
   const client = clientRequireToken(token);
   return (
     <>

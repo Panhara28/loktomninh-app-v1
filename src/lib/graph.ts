@@ -126,3 +126,12 @@ export const CHECKOUT = gql`
     checkout(input: $input, phone_number: $phone_number, address: $address)
   }
 `;
+
+export const SEARCH_PRODUCTS = gql`
+  query clientProductSearch($limit: Int!, $offset: Int!, $search: String) {
+    clientProductSearch(limit: $limit, offset: $offset, search: $search) {
+      product_name
+      slug
+    }
+  }
+`;
