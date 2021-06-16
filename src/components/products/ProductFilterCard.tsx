@@ -3,7 +3,7 @@ import Accordion from "../accordion/Accordion";
 import AccordionHeader from "../accordion/AccordionHeader";
 import Card from "../Card";
 import Divider from "../Divider";
-import { H5, H6, Paragraph, SemiSpan } from "../Typography";
+import { H6, Paragraph, SemiSpan } from "../Typography";
 
 const ProductFilterCard = () => {
   return (
