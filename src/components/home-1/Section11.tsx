@@ -6,7 +6,7 @@ import ProductCard1 from "../product-cards/ProductCard1";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCT_LIST } from "lib/graph";
 import { useOnScreen } from "@hook/useOnScreen";
-import MainCardPlaceholder from "@component/placeholder/MainCardPlaceholder";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const Section11: React.FC = () => {
   const { loading, data, fetchMore, error } = useQuery(GET_PRODUCT_LIST, {
@@ -24,8 +24,6 @@ const Section11: React.FC = () => {
   if (loading || data === undefined) return <></>;
   if (error) return <div>{`Error ${error}`}</div>;
 
-  const mainCardPlaceholder = ["a"];
-
   return (
     <Container mb="70px">
       <CategorySectionHeader title="More For You" seeMoreLink="#" />
@@ -38,8 +36,11 @@ const Section11: React.FC = () => {
             </Grid>
           ))}
       </Grid>
-      {isLoading &&
-        mainCardPlaceholder.map((val) => <MainCardPlaceholder key={val} />)}
+      {isLoading && (
+        <div style={{ textAlign: "center", marginTop: 30 }}>
+          <BeatLoader color={"#E94560"} loading={isLoading} size={15} />
+        </div>
+      )}
 
       {!isLoading && more && (
         <div ref={setRef} style={{ backgroundColor: "transparent" }}></div>

@@ -5,26 +5,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useContext, useState } from "react";
 import * as yup from "yup";
-import Box from "../Box";
 import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
-import Divider from "../Divider";
 import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
 import TextField from "../text-field/TextField";
-import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
+import { H3, H5, H6, SemiSpan } from "../Typography";
 import { StyledSessionCard } from "./SessionStyle";
 import { useMutation } from "@apollo/client";
 import { CUSTOMER_LOGIN } from "lib/graph";
 import { AuthContext } from "@context/app/Auth";
-
-function getPhoneNumber(phoneNumber: string) {
-  if (phoneNumber.charAt(0) == "0") {
-    return phoneNumber.substring(1, phoneNumber.length);
-  }
-
-  return phoneNumber;
-}
+import { getPhoneNumber } from "functions/getNumber";
 
 const Login: React.FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -47,8 +38,6 @@ const Login: React.FC = () => {
   }, []);
 
   const handleFormSubmit = (values) => {
-    // router.push("/profile");
-    // console.log(values);
     userLogin({
       variables: {
         data: {
@@ -84,7 +73,7 @@ const Login: React.FC = () => {
           textAlign="center"
           mb="2.25rem"
         >
-          Log in with email & password
+          Log in with phone number & password
         </H5>
 
         <TextField
@@ -92,7 +81,7 @@ const Login: React.FC = () => {
           name="phone_number"
           placeholder="Example: 092888168"
           label="Phone Number"
-          type="tel"
+          type="text"
           fullwidth
           onBlur={handleBlur}
           onChange={handleChange}
@@ -136,47 +125,6 @@ const Login: React.FC = () => {
         >
           Login
         </Button>
-
-        <Box mb="1rem">
-          <Divider width="200px" mx="auto" />
-          <FlexBox justifyContent="center" mt="-14px">
-            <Span color="text.muted" bg="body.paper" px="1rem">
-              on
-            </Span>
-          </FlexBox>
-        </Box>
-
-        <FlexBox
-          justifyContent="center"
-          alignItems="center"
-          bg="#3B5998"
-          borderRadius={5}
-          height="40px"
-          color="white"
-          cursor="pointer"
-          mb="0.75rem"
-        >
-          <Icon variant="small" defaultcolor="auto" mr="0.5rem">
-            facebook-filled-white
-          </Icon>
-          <Small fontWeight="600">Continue with Facebook</Small>
-        </FlexBox>
-
-        <FlexBox
-          justifyContent="center"
-          alignItems="center"
-          bg="#4285F4"
-          borderRadius={5}
-          height="40px"
-          color="white"
-          cursor="pointer"
-          mb="1.25rem"
-        >
-          <Icon variant="small" defaultcolor="auto" mr="0.5rem">
-            google-1
-          </Icon>
-          <Small fontWeight="600">Continue with Google</Small>
-        </FlexBox>
 
         <FlexBox justifyContent="center" mb="1.25rem">
           <SemiSpan>Don’t have account?</SemiSpan>

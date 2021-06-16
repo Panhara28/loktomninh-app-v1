@@ -12,11 +12,11 @@ import { StyledProductCard1 } from "./ProductCardStyle";
 export interface ProductCard1Props extends CardProps {
   className?: string;
   style?: CSSProperties;
-  product_name: string;
-  properties: any[];
-  slug: string;
-  image: any[];
-  id: number;
+  product_name?: string;
+  properties?: any[];
+  slug?: string;
+  image?: any[];
+  id?: number;
 }
 
 const ProductCard1: React.FC<ProductCard1Props> = ({
