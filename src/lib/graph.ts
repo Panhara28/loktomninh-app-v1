@@ -42,6 +42,16 @@ export const GET_CATEGORY_LIST = gql`
       category_name
       image
       slug
+      product {
+        product_name
+        slug
+        image
+        properties {
+          id
+          price
+          stock
+        }
+      }
     }
   }
 `;
@@ -132,6 +142,7 @@ export const SEARCH_PRODUCTS = gql`
     clientProductSearch(limit: $limit, offset: $offset, search: $search) {
       product_name
       slug
+      image
     }
   }
 `;
