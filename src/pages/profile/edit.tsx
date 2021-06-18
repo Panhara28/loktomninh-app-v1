@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import Button from "@component/buttons/Button";
 import { Card1 } from "@component/Card1";
@@ -12,8 +11,6 @@ import {
   ContactContainer,
 } from "@component/Form/profile.styled";
 import Grid from "@component/grid/Grid";
-import Hidden from "@component/hidden/Hidden";
-import Icon from "@component/icon/Icon";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import { GET_CUSTOMER_LOGGED, UPDATE_CUSTOMER } from "lib/graph";
@@ -89,9 +86,9 @@ const ProfileEditor = () => {
 
       <Card1>
         <FlexBox alignItems="flex-end" mb="22px">
-          <Avatar src="/assets/images/faces/ralph.png" size={64} />
+          {/* <Avatar src="/assets/images/faces/ralph.png" size={64} /> */}
 
-          <Box ml="-20px" zIndex={1}>
+          {/* <Box ml="-20px" zIndex={1}>
             <label htmlFor="profile-image">
               <Button
                 as="span"
@@ -105,8 +102,8 @@ const ProfileEditor = () => {
                 <Icon>camera</Icon>
               </Button>
             </label>
-          </Box>
-          <Hidden>
+          </Box> */}
+          {/* <Hidden>
             <input
               className="hidden"
               onChange={(e) => console.log(e.target.files)}
@@ -114,12 +111,12 @@ const ProfileEditor = () => {
               accept="image/*"
               type="file"
             />
-          </Hidden>
+          </Hidden> */}
         </FlexBox>
 
         <Box mb="30px">
           <Grid container horizontal_spacing={6} vertical_spacing={4}>
-            <Grid item md={6} xs={12}>
+            <Grid item md={12} xs={12}>
               <PanharaInput
                 defaultValue={data.customerLogged?.nameDisplay}
                 ref={(node) => (nameDisplayInput = node)}
