@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { clientRequireToken } from "lib/apollo";
 import Head from "next/head";
 import Router from "next/router";

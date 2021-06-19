@@ -42,8 +42,8 @@ const Topbar: React.FC = () => {
         height="100%"
       >
         <FlexBox className="topbar-left">
-          <div className="logo">
-            <img src="/assets/images/logo.svg" alt="logo" />
+          <div className="logo" onClick={() => router.push("/")}>
+            <img src="/assets/images/logo/brand.png" alt="logo" />
           </div>
           <FlexBox alignItems="center">
             <Icon size="14px">phone-call</Icon>

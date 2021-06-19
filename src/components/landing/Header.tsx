@@ -1,28 +1,28 @@
-import Box from '@component/Box';
-import Button from '@component/buttons/Button';
-import IconButton from '@component/buttons/IconButton';
-import Container from '@component/Container';
-import FlexBox from '@component/FlexBox';
-import Icon from '@component/icon/Icon';
-import Image from '@component/Image';
-import Sidenav from '@component/sidenav/Sidenav';
-import Typography from '@component/Typography';
-import { getTheme } from '@utils/utils';
-import { debounce } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link as Scroll } from 'react-scroll';
-import styled from 'styled-components';
+import Box from "@component/Box";
+import Button from "@component/buttons/Button";
+import IconButton from "@component/buttons/IconButton";
+import Container from "@component/Container";
+import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
+import Image from "@component/Image";
+import Sidenav from "@component/sidenav/Sidenav";
+import Typography from "@component/Typography";
+import { getTheme } from "@utils/utils";
+import { debounce } from "lodash";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link as Scroll } from "react-scroll";
+import styled from "styled-components";
 
 const headerHeight = 72;
 
 const HeaderWrapper = styled.div<{ fixed: boolean }>`
-  box-shadow: ${(props) => props.fixed && getTheme('shadows.regular')};
+  box-shadow: ${(props) => props.fixed && getTheme("shadows.regular")};
 
   .link {
     transition: color 250ms ease-in-out;
     cursor: pointer;
     :hover {
-      color: ${getTheme('colors.primary.main')};
+      color: ${getTheme("colors.primary.main")};
     }
   }
 
@@ -56,7 +56,7 @@ const HeaderWrapper = styled.div<{ fixed: boolean }>`
       padding-top: ${headerHeight}px;
     }
   `
-      : ''}
+      : ""}
 
   .menu {
     display: none;
@@ -92,9 +92,9 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (!window) return;
 
-    window.addEventListener('scroll', scrollListener);
+    window.addEventListener("scroll", scrollListener);
     return () => {
-      window.removeEventListener('scroll', scrollListener);
+      window.removeEventListener("scroll", scrollListener);
     };
   }, []);
 
@@ -111,7 +111,7 @@ const Header: React.FC = () => {
               <Image
                 width="96px"
                 height="44px"
-                src="/assets/images/logo.svg"
+                src="/assets/images/logo/brand.png"
                 alt="logo"
               />
             </Box>

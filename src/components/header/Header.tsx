@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <Image src="/assets/images/logo.svg" alt="logo" />
+              <Image src="/assets/images/logo/brand.png" alt="logo" />
             </a>
           </Link>
 

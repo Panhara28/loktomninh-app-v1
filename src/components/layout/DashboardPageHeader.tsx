@@ -5,18 +5,20 @@ import FlexBox from "../FlexBox";
 import Icon from "../icon/Icon";
 import Sidenav from "../sidenav/Sidenav";
 import { H2 } from "../Typography";
-import DashboardNavigation from "./CustomerDashboardNavigation";
+import CustomerDashboardNavigation from "./CustomerDashboardNavigation";
 
 export interface DashboardPageHeaderProps {
   iconName?: string;
   title?: string;
   button?: any;
+  order_count?: string;
 }
 
 const DashboardPageHeader: React.FC<DashboardPageHeaderProps> = ({
   iconName,
   title,
   button,
+  order_count,
 }) => {
   const width = useWindowSize();
   const isTablet = width < 1025;
@@ -33,7 +35,7 @@ const DashboardPageHeader: React.FC<DashboardPageHeaderProps> = ({
 
         {isTablet && (
           <Sidenav position="left" handle={<Icon mx="1rem">menu</Icon>}>
-            <DashboardNavigation />
+            <CustomerDashboardNavigation order_count={order_count} />
           </Sidenav>
         )}
 
