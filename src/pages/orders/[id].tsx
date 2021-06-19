@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import Button from "@component/buttons/Button";
@@ -10,14 +11,20 @@ import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import TableRow from "@component/TableRow";
 import Typography, { H5, H6, Paragraph } from "@component/Typography";
-import productDatabase from "@data/product-database";
 import useWindowSize from "@hook/useWindowSize";
 import { format } from "date-fns";
+import { ORDER_DETAIL } from "lib/graph";
+import moment from "moment-timezone";
 import React, { Fragment } from "react";
 
 type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 
-const OrderDetails = () => {
+const OrderDetails = ({ id }) => {
+  const { data, loading } = useQuery(ORDER_DETAIL, {
+    variables: {
+      id: Number(id),
+    },
+  });
   const orderStatus: OrderStatus = "shipping";
   const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
   const stepIconList = ["package-box", "truck-1", "delivery"];
@@ -25,6 +32,8 @@ const OrderDetails = () => {
   const statusIndex = orderStatusList.indexOf(orderStatus);
   const width = useWindowSize();
   const breakpoint = 350;
+
+  if (loading || !data) return <div>Loading...</div>;
 
   return (
     <div>
@@ -99,14 +108,18 @@ const OrderDetails = () => {
             <Typography fontSize="14px" color="text.muted" mr="4px">
               Order ID:
             </Typography>
-            <Typography fontSize="14px">9001997718074513</Typography>
+            <Typography fontSize="14px">
+              {data && data.clientOrderDetail.id}
+            </Typography>
           </FlexBox>
           <FlexBox className="pre" m="6px" alignItems="center">
             <Typography fontSize="14px" color="text.muted" mr="4px">
               Placed on:
             </Typography>
             <Typography fontSize="14px">
-              {format(new Date(), "dd MMM, yyyy")}
+              {moment(Number(data && data.clientOrderDetail.order_date)).format(
+                "Do MMM, YYYY"
+              )}
             </Typography>
           </FlexBox>
           <FlexBox className="pre" m="6px" alignItems="center">
@@ -120,35 +133,36 @@ const OrderDetails = () => {
         </TableRow>
 
         <Box py="0.5rem">
-          {productDatabase.slice(179, 182).map((item) => (
-            <FlexBox
-              px="1rem"
-              py="0.5rem"
-              flexWrap="wrap"
-              alignItems="center"
-              key={item.id}
-            >
-              <FlexBox flex="2 2 260px" m="6px" alignItems="center">
-                <Avatar src={item.imgUrl} size={64} />
-                <Box ml="20px">
-                  <H6 my="0px">{item.title}</H6>
+          {data &&
+            data.clientOrderDetail.order_items.map((item) => (
+              <FlexBox
+                px="1rem"
+                py="0.5rem"
+                flexWrap="wrap"
+                alignItems="center"
+                key={item.id}
+              >
+                <FlexBox flex="2 2 260px" m="6px" alignItems="center">
+                  <Avatar src={item.property.image_url} size={64} />
+                  <Box ml="20px">
+                    <H6 my="0px">{item.title}</H6>
+                    <Typography fontSize="14px" color="text.muted">
+                      ${item.unit_price} x {item.qty}
+                    </Typography>
+                  </Box>
+                </FlexBox>
+                <FlexBox flex="1 1 260px" m="6px" alignItems="center">
                   <Typography fontSize="14px" color="text.muted">
-                    ${item.price} x 1
+                    Product properties: {item.property.property}
                   </Typography>
-                </Box>
+                </FlexBox>
+                <FlexBox flex="160px" m="6px" alignItems="center">
+                  <Button variant="text" color="primary">
+                    <Typography fontSize="14px">Write a Review</Typography>
+                  </Button>
+                </FlexBox>
               </FlexBox>
-              <FlexBox flex="1 1 260px" m="6px" alignItems="center">
-                <Typography fontSize="14px" color="text.muted">
-                  Product properties: Black, L
-                </Typography>
-              </FlexBox>
-              <FlexBox flex="160px" m="6px" alignItems="center">
-                <Button variant="text" color="primary">
-                  <Typography fontSize="14px">Write a Review</Typography>
-                </Button>
-              </FlexBox>
-            </FlexBox>
-          ))}
+            ))}
         </Box>
       </Card>
 
@@ -159,7 +173,7 @@ const OrderDetails = () => {
               Shipping Address
             </H5>
             <Paragraph fontSize="14px" my="0px">
-              Kelly Williams 777 Brockton Avenue, Abington MA 2351
+              {data && data.clientOrderDetail.address}
             </Paragraph>
           </Card>
         </Grid>
@@ -176,7 +190,7 @@ const OrderDetails = () => {
               <Typography fontSize="14px" color="text.hint">
                 Subtotal:
               </Typography>
-              <H6 my="0px">$335</H6>
+              <H6 my="0px">${data && data.clientOrderDetail.sub_total}</H6>
             </FlexBox>
             <FlexBox
               justifyContent="space-between"
@@ -184,9 +198,9 @@ const OrderDetails = () => {
               mb="0.5rem"
             >
               <Typography fontSize="14px" color="text.hint">
-                Shipping fee:
+                Delivery fee:
               </Typography>
-              <H6 my="0px">$10</H6>
+              <H6 my="0px">$0.0</H6>
             </FlexBox>
             <FlexBox
               justifyContent="space-between"
@@ -196,7 +210,7 @@ const OrderDetails = () => {
               <Typography fontSize="14px" color="text.hint">
                 Discount:
               </Typography>
-              <H6 my="0px">-$30</H6>
+              <H6 my="0px">-$0.0</H6>
             </FlexBox>
 
             <Divider mb="0.5rem" />
@@ -207,7 +221,7 @@ const OrderDetails = () => {
               mb="1rem"
             >
               <H6 my="0px">Total</H6>
-              <H6 my="0px">$315</H6>
+              <H6 my="0px">${data && data.clientOrderDetail.total}</H6>
             </FlexBox>
             <Typography fontSize="14px">Paid by Credit/Debit Card</Typography>
           </Card>
@@ -216,6 +230,12 @@ const OrderDetails = () => {
     </div>
   );
 };
+
+export function getServerSideProps(params) {
+  const id = params.query;
+
+  return { props: id };
+}
 
 OrderDetails.layout = DashboardLayout;
 

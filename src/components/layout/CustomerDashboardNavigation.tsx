@@ -9,8 +9,13 @@ import {
   StyledDashboardNav,
 } from "./DashboardStyle";
 
-const CustomerDashboardNavigation = () => {
+type Props = {
+  order_count?: string;
+};
+
+const CustomerDashboardNavigation = (props: Props) => {
   const { pathname } = useRouter();
+  console.log("order_count", props.order_count);
 
   return (
     <DashboardNavigationWrapper px="0px" pb="1.5rem" color="gray.900">
@@ -35,7 +40,7 @@ const CustomerDashboardNavigation = () => {
                 </Box>
                 <span>{item.title}</span>
               </FlexBox>
-              <span>{item.count}</span>
+              <span>{props.order_count}</span>
             </StyledDashboardNav>
           ))}
         </Fragment>
@@ -52,7 +57,6 @@ const linkList = [
         href: "/orders",
         title: "Orders",
         iconName: "bag",
-        count: 5,
       },
     ],
   },

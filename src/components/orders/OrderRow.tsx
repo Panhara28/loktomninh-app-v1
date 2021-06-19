@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import moment from "moment-timezone";
 import Link from "next/link";
 import React from "react";
 import Box from "../Box";
@@ -10,47 +10,56 @@ import TableRow from "../TableRow";
 import Typography, { H5, Small } from "../Typography";
 
 export interface OrderRowProps {
-  item: {
-    orderNo: any;
+  order?: {
+    id: number;
+    order_date: any;
+    order_time: string;
+    total: number;
+    sub_total: number;
     status: string;
-    href: string;
-    purchaseDate: string | Date;
-    price: number;
   };
 }
 
-const OrderRow: React.FC<OrderRowProps> = ({ item }) => {
+const OrderRow: React.FC<OrderRowProps> = ({ order }) => {
   const getColor = (status) => {
     switch (status) {
-      case "Pending":
+      case "PENDING":
         return "secondary";
-      case "Processing":
+      case "IN PROGRESS":
         return "secondary";
-      case "Delivered":
+      case "APRROVED":
         return "success";
-      case "Cancelled":
+      case "CANCELLED":
         return "error";
       default:
         return "";
     }
   };
+  console.log(order.order_date);
 
   return (
-    <Link href={item.href}>
-      <TableRow as="a" href={item.href} my="1rem" padding="6px 18px">
+    <Link href={`/orders/${order.id}`}>
+      <TableRow
+        as="a"
+        href={`/orders/${order.id}`}
+        my="1rem"
+        padding="6px 18px"
+      >
         <H5 m="6px" textAlign="left">
-          {item.orderNo}
+          {order.id}
         </H5>
         <Box m="6px">
-          <Chip p="0.25rem 1rem" bg={`${getColor(item.status)}.light`}>
-            <Small color={`${getColor(item.status)}.main`}>{item.status}</Small>
+          <Chip p="0.25rem 1rem" bg={`${getColor(order.status)}.light`}>
+            <Small color={`${getColor(order.status)}.main`}>
+              {order.status}
+            </Small>
           </Chip>
         </Box>
         <Typography className="flex-grow pre" m="6px" textAlign="left">
-          {format(new Date(item.purchaseDate), "MMM dd, yyyy")}
+          {moment(Number(order.order_date)).format("MMM Do YY")}
         </Typography>
         <Typography m="6px" textAlign="left">
-          ${item.price.toFixed(2)}
+          ${order.total.toFixed(2)}
         </Typography>
 
         <Hidden flex="0 0 0 !important" down={769}>

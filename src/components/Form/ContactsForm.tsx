@@ -58,7 +58,6 @@ export function ContactsForm({ input, setInput, isShow }: Props) {
                   name="phone_number"
                   value={contact.phone_number}
                   onChange={(e) => handleChange(idx, e)}
-                  autoFocus
                 ></ContactInput>
 
                 <ContactStatus>

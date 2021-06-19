@@ -120,6 +120,7 @@ const ProfileEditor = () => {
               <PanharaInput
                 defaultValue={data.customerLogged?.nameDisplay}
                 ref={(node) => (nameDisplayInput = node)}
+                autoFocus={true}
               />
             </Grid>
           </Grid>

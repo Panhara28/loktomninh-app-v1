@@ -146,3 +146,51 @@ export const SEARCH_PRODUCTS = gql`
     }
   }
 `;
+
+export const ORDER_LIST = gql`
+  query clientOrderList($limit: Int!, $offset: Int!, $status: String) {
+    clientOrderList(limit: $limit, offset: $offset, status: $status) {
+      data {
+        id
+        order_date
+        order_time
+        sub_total
+        total
+        is_paid
+        status
+      }
+      pagination {
+        total
+        current
+        size
+      }
+    }
+  }
+`;
+
+export const ORDER_DETAIL = gql`
+  query clientOrderDetail($id: Int!) {
+    clientOrderDetail(id: $id) {
+      id
+      order_date
+      order_time
+      sub_total
+      total
+      address
+      phone_number
+      order_items {
+        qty
+        unit_price
+        sub_total
+        property {
+          property
+          product_id
+          image_url
+          product {
+            product_name
+          }
+        }
+      }
+    }
+  }
+`;
