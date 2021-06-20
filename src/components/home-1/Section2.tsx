@@ -12,6 +12,7 @@ const Section2: React.FC = () => {
     variables: {
       limit: 5,
       offset: 1,
+      slug: "",
     },
   });
 

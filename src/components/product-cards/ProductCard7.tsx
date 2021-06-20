@@ -1,8 +1,9 @@
 import Box from "@component/Box";
 import Image from "@component/Image";
-import { useAppContext } from "@context/app/AppContext";
+import { reverseSlug } from "functions/reverseSlug";
 import Link from "next/link";
-import React, { useCallback } from "react";
+import React from "react";
+import { useCart } from "react-use-cart";
 import { SpaceProps } from "styled-system";
 import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
@@ -12,45 +13,29 @@ import Typography from "../Typography";
 import { StyledProductCard7 } from "./ProductCardStyle";
 
 export interface ProductCard7Props {
-  id: string | number;
-  name: string;
-  qty: number;
-  price: number;
-  imgUrl?: string;
+  id?: string | any;
+  quantity?: number;
+  price?: number;
+  image_url?: string;
+  slug?: string;
 }
 
 const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
   id,
-  name,
-  qty,
+  quantity,
   price,
-  imgUrl,
+  image_url,
+  slug,
   ...props
 }) => {
-  const { dispatch } = useAppContext();
-  const handleCartAmountChange = useCallback(
-    (amount) => () => {
-      dispatch({
-        type: "CHANGE_CART_AMOUNT",
-        payload: {
-          qty: amount,
-          name,
-          price,
-          imgUrl,
-          id,
-        },
-      });
-    },
-    []
-  );
-
+  const { updateItemQuantity, removeItem } = useCart();
   return (
     <StyledProductCard7 {...props}>
       <Image
-        src={imgUrl || "/assets/images/products/iphone-xi.png"}
-        size={140}
+        src={image_url || "/assets/images/products/iphone-xi.png"}
         display="block"
-        alt={name}
+        alt={slug}
+        style={{ width: "100%" }}
       />
       <FlexBox
         className="product-details"
@@ -67,7 +52,7 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
               fontSize="18px"
               mb="0.5rem"
             >
-              {name}
+              {reverseSlug(slug)}
             </Typography>
           </a>
         </Link>
@@ -76,7 +61,7 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
             padding="4px"
             ml="12px"
             size="small"
-            onClick={handleCartAmountChange(0)}
+            onClick={() => removeItem(id)}
           >
             <Icon size="1.25rem">close</Icon>
           </IconButton>
@@ -89,10 +74,10 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
         >
           <FlexBox flexWrap="wrap" alignItems="center">
             <Typography color="gray.600" mr="0.5rem">
-              ${price.toFixed(2)} x {qty}
+              ${Number(price).toFixed(2)} x {Number(quantity)}
             </Typography>
             <Typography fontWeight={600} color="primary.main" mr="1rem">
-              ${(price * qty).toFixed(2)}
+              ${(Number(price) * Number(quantity)).toFixed(2)}
             </Typography>
           </FlexBox>
 
@@ -103,13 +88,15 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
               padding="5px"
               size="none"
               borderColor="primary.light"
-              onClick={handleCartAmountChange(qty - 1)}
-              disabled={qty === 1}
+              onClick={() => {
+                updateItemQuantity(id, quantity - 1);
+              }}
+              disabled={quantity === 1}
             >
               <Icon variant="small">minus</Icon>
             </Button>
             <Typography mx="0.5rem" fontWeight="600" fontSize="15px">
-              {qty}
+              {quantity}
             </Typography>
             <Button
               variant="outlined"
@@ -117,7 +104,9 @@ const ProductCard7: React.FC<ProductCard7Props & SpaceProps> = ({
               padding="5px"
               size="none"
               borderColor="primary.light"
-              onClick={handleCartAmountChange(qty + 1)}
+              onClick={() => {
+                updateItemQuantity(id, quantity + 1);
+              }}
             >
               <Icon variant="small">plus</Icon>
             </Button>

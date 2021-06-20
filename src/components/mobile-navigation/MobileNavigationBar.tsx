@@ -1,16 +1,14 @@
 import { Chip } from "@component/Chip";
-import { useAppContext } from "@context/app/AppContext";
 import React from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import Icon from "../icon/Icon";
 import NavLink from "../nav-link/NavLink";
 import StyledMobileNavigationBar from "./MobileNavigationBar.style";
+import { useCart } from "react-use-cart";
 
 const MobileNavigationBar: React.FC = () => {
   const width = useWindowSize();
-  const { state } = useAppContext();
-  const { cartList } = state.cart;
-
+  const { totalUniqueItems } = useCart();
   return (
     width <= 900 && (
       <StyledMobileNavigationBar>
@@ -21,7 +19,7 @@ const MobileNavigationBar: React.FC = () => {
             </Icon>
             {item.title}
 
-            {item.title === "Cart" && !!cartList.length && (
+            {item.title === "Cart" && !!totalUniqueItems && (
               <Chip
                 bg="primary.main"
                 position="absolute"
@@ -31,7 +29,7 @@ const MobileNavigationBar: React.FC = () => {
                 top="4px"
                 left="calc(50% + 8px)"
               >
-                {cartList.length}
+                {totalUniqueItems}
               </Chip>
             )}
           </NavLink>
@@ -50,7 +48,7 @@ const list = [
   {
     title: "Category",
     icon: "category",
-    href: "/mobile-category-nav",
+    href: "/category/detail/fruites-and-vegetables",
   },
   {
     title: "Cart",
@@ -60,7 +58,7 @@ const list = [
   {
     title: "Account",
     icon: "user-2",
-    href: "/profile",
+    href: "/profile/edit",
   },
 ];
 

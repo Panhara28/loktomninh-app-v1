@@ -16,6 +16,7 @@ const CategoryDropdown: React.FC<CategoryDropdownProps> = ({
     variables: {
       limit: 0,
       offset: 0,
+      slug: "",
     },
   });
 

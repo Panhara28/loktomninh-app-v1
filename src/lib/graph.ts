@@ -36,7 +36,7 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_CATEGORY_LIST = gql`
-  query clientCategoryList($limit: Int!, $offset: Int!) {
+  query clientCategoryList($limit: Int!, $offset: Int!, $slug: String!) {
     clientCategoryList(limit: $limit, offset: $offset) {
       id
       category_name
@@ -46,6 +46,19 @@ export const GET_CATEGORY_LIST = gql`
         product_name
         slug
         image
+        properties {
+          id
+          price
+          stock
+        }
+      }
+    }
+    clientCategoryDetail(slug: $slug, limit: $limit, offset: $offset) {
+      product {
+        id
+        product_name
+        image
+        slug
         properties {
           id
           price
