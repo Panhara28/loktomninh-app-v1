@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.loktomninh.com",
+      "package_name": "com.loktomninh.twa",
       "sha256_cert_fingerprints": [
         "23:24:5F:13:2B:7A:22:A1:62:2E:0D:09:A9:FC:96:E8:AC:8F:9E:21:94:D0:C3:14:55:81:44:AC:BE:C6:18:82"
       ]
