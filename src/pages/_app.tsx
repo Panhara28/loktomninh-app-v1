@@ -13,7 +13,7 @@ import TokenContext from "@context/app/Token";
 import { CartProvider } from "react-use-cart";
 import { AuthProvider } from "@context/app/Auth";
 import { LoginContext } from "@context/app/LoginContext";
-
+import "../styles/main.scss";
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());

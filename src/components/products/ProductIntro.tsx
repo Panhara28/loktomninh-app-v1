@@ -120,7 +120,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
 
   return (
     <Box overflow="hidden">
-      <Grid container justifyContent="center" spacing={16}>
+      <Grid container justifyContent="center" spacing={10}>
         <Grid item md={6} xs={12} alignItems="center">
           <Box>
             <FlexBox justifyContent="center" mb="50px">
@@ -135,7 +135,20 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 unoptimized={true}
               />
             </FlexBox>
-            <FlexBox overflow="auto" style={{ justifyContent: "center" }}>
+          </Box>
+        </Grid>
+
+        <Grid item md={6} xs={12} alignItems="center">
+          <H1 mb="1rem">{product_name}</H1>
+
+          <Box mb="24px">
+            <H2 color="primary.main" mb="4px" lineHeight="1">
+              {price}$
+            </H2>
+
+            <SemiSpan color="inherit">Stock Available</SemiSpan>
+
+            <FlexBox overflow="auto" mt="30px">
               {sku.map((property, idx) => {
                 return (
                   <Button
@@ -158,16 +171,6 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 );
               })}
             </FlexBox>
-          </Box>
-        </Grid>
-
-        <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb="1rem">{product_name}</H1>
-
-          <Box mb="24px">
-            <H2 color="primary.main" mb="4px" lineHeight="1">
-              {price}$
-            </H2>
 
             {sku.map((_, index) => {
               if (optionIdx !== index) return <div />;
@@ -177,7 +180,6 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 </div>
               );
             })}
-            <SemiSpan color="inherit">Stock Available</SemiSpan>
           </Box>
         </Grid>
       </Grid>

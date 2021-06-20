@@ -80,7 +80,7 @@ const CheckoutForm2 = () => {
     });
   };
 
-  if (loading || data === undefined) return <div></div>;
+  if (loading || data === undefined) return <></>;
 
   return (
     <Grid container spacing={6}>

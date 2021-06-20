@@ -26,7 +26,7 @@ const Section2: React.FC = () => {
     else setVisibleSlides(4);
   }, [width]);
 
-  if (loading || !data) return <div>Loading</div>;
+  if (loading || !data) return <></>;
 
   return (
     <>

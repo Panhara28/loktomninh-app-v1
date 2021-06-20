@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import Button from "@component/buttons/Button";
@@ -12,18 +12,54 @@ import Grid from "@component/grid/Grid";
 import AppLayout from "@component/layout/AppLayout";
 import ProductCard7 from "@component/product-cards/ProductCard7";
 import Typography from "@component/Typography";
-import { GET_CUSTOMER_LOGGED } from "lib/graph";
+import { AuthContext } from "@context/app/Auth";
+import { CHECKOUT, GET_CUSTOMER_LOGGED } from "lib/graph";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
+import { useContext } from "react";
 import { useCart } from "react-use-cart";
 
 const Cart = () => {
-  const { items, cartTotal } = useCart();
+  const router = useRouter();
+  const { customer } = useContext(AuthContext);
+  const { items, cartTotal, emptyCart } = useCart();
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
   ]);
   const [locations, setLocation] = useState([{ location: "", active: false }]);
+
+  const [checkout] = useMutation(CHECKOUT, {
+    onCompleted: () => {
+      emptyCart();
+      router.push("/thanks");
+    },
+  });
+
+  const dataCheckout: any[] = [];
+
+  items.map((x) => {
+    dataCheckout.push({
+      product_id: x.id,
+      qty: x.quantity,
+    });
+  });
+
+  const location = locations?.filter((x) => x.active === true);
+
+  const phone_number = contacts?.filter((x) => x.active === true);
+
+  const onCheckout = () => {
+    checkout({
+      variables: {
+        input: dataCheckout,
+        phone_number: phone_number[0].phone_number,
+        address: location[0].location,
+      },
+    });
+  };
+
   const { data, loading } = useQuery(GET_CUSTOMER_LOGGED, {
     onCompleted: (data) => {
       setContacts(
@@ -46,7 +82,12 @@ const Cart = () => {
       );
     },
   });
-  if (loading || data === undefined) return <div></div>;
+
+  if (!customer) {
+    router.push("/login");
+  }
+
+  if (loading || data === undefined) return <></>;
 
   return (
     <Fragment>
@@ -127,6 +168,7 @@ const Cart = () => {
                 fullwidth
                 mb="100px"
                 mt="20px"
+                onClick={onCheckout}
               >
                 Checkout Now
               </Button>

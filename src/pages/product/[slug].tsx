@@ -29,7 +29,7 @@ const ProductDetails = ({ slug }) => {
       <FlexBox
         borderBottom="1px solid"
         borderColor="gray.400"
-        mt="80px"
+        mt="20px"
         mb="26px"
       >
         <H5
@@ -47,7 +47,7 @@ const ProductDetails = ({ slug }) => {
         </H5>
       </FlexBox>
 
-      <Box mb="50px">
+      <Box mb="100px">
         {selectedOption === "description" && (
           <ProductDescription
             description={data.clientProductDetail.description}
