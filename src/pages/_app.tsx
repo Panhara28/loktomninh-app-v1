@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }: any) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Head>
+        {/* <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta
@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }: any) => {
             property="og:image"
             content="/assets/images/landing/preview.png"
           />
-        </Head>
+        </Head> */}
         <GlobalStyles />
 
         <ApolloProvider client={client}>
