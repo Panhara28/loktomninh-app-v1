@@ -3,33 +3,18 @@
   "short_name": "Loktomninh",
   "icons": [
     {
-      "src": "/assets/default/android-launchericon-48-48.png",
-      "sizes": "48x48",
+      "src": "/assets/default/loktomninh-192x192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/default/android-launchericon-72-72.png",
-      "sizes": "72x72",
+      "src": "/assets/default/loktomninh-384x384.png",
+      "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/assets/default/android-launchericon-96-96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/default/android-launchericon-144-144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/default/android-launchericon-192-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/default/android-launchericon-96-96.png",
+      "src": "/assets/default/loktomninh-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
