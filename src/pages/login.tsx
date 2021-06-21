@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import FlexBox from "../components/FlexBox";
 import Login from "../components/sessions/Login";
@@ -11,8 +12,11 @@ const LoginPage = () => {
       justifyContent="center"
       className="mx-2"
     >
-      <img src="/assets/images/logo/brand.png" />
-
+      <Link href="/">
+        <a>
+          <img src="/assets/images/logo/brand.png" />
+        </a>
+      </Link>
       <Login />
     </FlexBox>
   );

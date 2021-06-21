@@ -25,6 +25,11 @@ import { useCart } from "react-use-cart";
 const Cart = () => {
   const router = useRouter();
   const { customer } = useContext(AuthContext);
+
+  if (!customer) {
+    router.push("/login");
+  }
+
   const { items, cartTotal, emptyCart } = useCart();
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
@@ -64,7 +69,6 @@ const Cart = () => {
       router.push("/cart");
       toastr.warning("No item in the cart");
     }
-
   };
 
   const { data, loading } = useQuery(GET_CUSTOMER_LOGGED, {
@@ -90,20 +94,17 @@ const Cart = () => {
     },
   });
 
-  if (!customer) {
-    router.push("/login");
-  }
-
   if (loading || data === undefined) return <></>;
 
   return (
     <Fragment>
       <Grid container className="mt-3 mx-2">
         <Grid item lg={8} md={8} xs={12}>
-          {items.length > 0 ? (<div></div>) : (<NoCart />)}
-          {items && items.map((item) => {
-            return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
-          })}
+          {items.length > 0 ? <div></div> : <NoCart />}
+          {items &&
+            items.map((item) => {
+              return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
+            })}
         </Grid>
         <Grid item lg={4} md={4} xs={12}>
           <Card1>

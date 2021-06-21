@@ -13,12 +13,20 @@ import {
 import Grid from "@component/grid/Grid";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
+import { AuthContext } from "@context/app/Auth";
 import { GET_CUSTOMER_LOGGED, UPDATE_CUSTOMER } from "lib/graph";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
 
 const ProfileEditor = () => {
   let nameDisplayInput;
+  const router = useRouter();
+  const { customer } = useContext(AuthContext);
+
+  if (!customer) {
+    router.push("/login");
+  }
 
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
