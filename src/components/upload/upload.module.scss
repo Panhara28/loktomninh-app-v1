@@ -1,0 +1,17 @@
+.upload {
+  border-radius: 5px;
+  cursor: pointer;
+
+  .uploadBody {
+    color: #e94560;
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px dashed #e94560;
+    text-align: center;
+  }
+}

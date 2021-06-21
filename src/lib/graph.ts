@@ -145,8 +145,14 @@ export const CHECKOUT = gql`
     $input: [CheckoutInput]
     $phone_number: String!
     $address: String!
+    $aba_image: String!
   ) {
-    checkout(input: $input, phone_number: $phone_number, address: $address)
+    checkout(
+      input: $input
+      phone_number: $phone_number
+      address: $address
+      aba_image: $aba_image
+    )
   }
 `;
 
@@ -205,5 +211,11 @@ export const ORDER_DETAIL = gql`
         }
       }
     }
+  }
+`;
+
+export const UPLOAD = gql`
+  mutation singleUpload($file: Upload!) {
+    singleUpload(file: $file)
   }
 `;
