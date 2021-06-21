@@ -134,6 +134,30 @@ const CheckoutForm2 = () => {
               </AddressContainer>
             </Grid>
           </Card1>
+          <Card1 mb="1.5rem">
+            <FlexBox alignItems="center" mb="1.75rem">
+              <Avatar
+                bg="primary.main"
+                size={32}
+                color="primary.text"
+                mr="0.875rem"
+              >
+                3
+              </Avatar>
+              <Typography fontSize="20px">Payment Details</Typography>
+            </FlexBox>
+
+            <Typography mb="0.75rem">Upload your ABA Screenshot</Typography>
+            <Grid container spacing={6}>
+              <AddressContainer>
+                <ContactsForm
+                  input={contacts}
+                  setInput={setContacts}
+                  isShow={true}
+                />
+              </AddressContainer>
+            </Grid>
+          </Card1>
         </form>
       </Grid>
 

@@ -84,13 +84,13 @@ const Footer: React.FC = () => {
                   Contact Us
                 </Typography>
                 <Typography py="0.3rem" color="gray.500">
-                  70 Washington Square South, New York, NY 10012, United States
+                  57ceo Street 204 Sangkat Tik Laork 3 Kanh Tol Kork, Pnhom Penh
                 </Typography>
                 <Typography py="0.3rem" color="gray.500">
-                  Email: uilib.help@gmail.com
+                  Email: loktomninh@gmail.com
                 </Typography>
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +1 1123 456 780
+                  Phone: +85595477325
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">
