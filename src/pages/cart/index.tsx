@@ -10,12 +10,13 @@ import { DeliveryForm } from "@component/Form/DeliveryForm";
 import { AddressContainer } from "@component/Form/profile.styled";
 import Grid from "@component/grid/Grid";
 import AppLayout from "@component/layout/AppLayout";
+import { NoCart } from "@component/nocart";
 import ProductCard7 from "@component/product-cards/ProductCard7";
 import Typography from "@component/Typography";
 import { AuthContext } from "@context/app/Auth";
 import { CHECKOUT, GET_CUSTOMER_LOGGED } from "lib/graph";
-
-import Link from "next/link";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import { useContext } from "react";
@@ -51,13 +52,19 @@ const Cart = () => {
   const phone_number = contacts?.filter((x) => x.active === true);
 
   const onCheckout = () => {
-    checkout({
-      variables: {
-        input: dataCheckout,
-        phone_number: phone_number[0].phone_number,
-        address: location[0].location,
-      },
-    });
+    if (items.length > 0) {
+      checkout({
+        variables: {
+          input: dataCheckout,
+          phone_number: phone_number[0].phone_number,
+          address: location[0].location,
+        },
+      });
+    } else {
+      router.push("/cart");
+      toastr.warning("No item in the cart");
+    }
+
   };
 
   const { data, loading } = useQuery(GET_CUSTOMER_LOGGED, {
@@ -93,7 +100,8 @@ const Cart = () => {
     <Fragment>
       <Grid container className="mt-3 mx-2">
         <Grid item lg={8} md={8} xs={12}>
-          {items.map((item) => {
+          {items.length > 0 ? (<div></div>) : (<NoCart />)}
+          {items && items.map((item) => {
             return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
           })}
         </Grid>
@@ -161,18 +169,16 @@ const Cart = () => {
               </AddressContainer>
             </Box>
 
-            <Link href="/checkout">
-              <Button
-                variant="contained"
-                color="primary"
-                fullwidth
-                mb="100px"
-                mt="20px"
-                onClick={onCheckout}
-              >
-                Checkout Now
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              fullwidth
+              mb="100px"
+              mt="20px"
+              onClick={onCheckout}
+            >
+              Checkout Now
+            </Button>
           </Card1>
         </Grid>
       </Grid>

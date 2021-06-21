@@ -149,7 +149,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
               </Typography>
             </Button>
           </Link>
-          <Link href="/cart">
+          {/* <Link href="/cart">
             <Button
               color="primary"
               variant="outlined"
@@ -158,7 +158,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
             >
               <Typography fontWeight={600}>View Cart</Typography>
             </Button>
-          </Link>
+          </Link> */}
         </Fragment>
       )}
     </StyledMiniCart>
@@ -166,7 +166,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
 };
 
 MiniCart.defaultProps = {
-  toggleSidenav: () => {},
+  toggleSidenav: () => { },
 };
 
 export default MiniCart;

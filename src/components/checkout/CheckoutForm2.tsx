@@ -2,7 +2,7 @@ import Avatar from "@component/avatar/Avatar";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import Button from "../buttons/Button";
 import { Card1 } from "../Card1";
 import Grid from "../grid/Grid";
@@ -14,23 +14,28 @@ import { DeliveryForm } from "@component/Form/DeliveryForm";
 import { AddressContainer } from "@component/Form/profile.styled";
 import { ContactsForm } from "@component/Form/ContactsForm";
 import Divider from "@component/Divider";
+import { Col, Row } from "react-bootstrap";
+import style from "./styles.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { UploadImage } from "@component/upload";
 
 const CheckoutForm2 = () => {
+  let uploadingImageNode: ReactNode;
+  let imageNode: ReactNode;
+  const [filename, setFilename] = useState<any>({});
+
   const router = useRouter();
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
   ]);
   const [locations, setLocation] = useState([{ location: "", active: false }]);
-  const { emptyCart, items, isEmpty, cartTotal } = useCart();
-
-  if (isEmpty) {
-    router.push("/");
-  }
+  const { emptyCart, items, cartTotal } = useCart();
 
   const [checkout] = useMutation(CHECKOUT, {
     onCompleted: () => {
-      alert("Order Completed");
       emptyCart();
+      router.push("/thanks");
     },
   });
 
@@ -76,9 +81,41 @@ const CheckoutForm2 = () => {
         input: dataCheckout,
         phone_number: phone_number[0].phone_number,
         address: location[0].location,
+        aba_image: filename?.src,
       },
     });
   };
+
+  // Handle Image Uploading
+  if (filename.loading) {
+    uploadingImageNode = (
+      <div className={style.imageUploadingContainer}>
+        <div className={style.imageUploading}>
+          <FontAwesomeIcon icon={faCog} spin={true} /> Uploading...
+        </div>
+      </div>
+    );
+  }
+
+  if (filename.src) {
+    imageNode = (
+      <div className={style.imageContainer}>
+        <img className={style.image} src={filename.src} />
+        <div
+          className={style.imageRemove}
+          onClick={() => {
+            setFilename({});
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faTimesCircle}
+            style={{ color: "#e74c3c", fontSize: 30 }}
+          />
+        </div>
+        {uploadingImageNode}
+      </div>
+    );
+  }
 
   if (loading || data === undefined) return <></>;
 
@@ -95,6 +132,37 @@ const CheckoutForm2 = () => {
                 mr="0.875rem"
               >
                 1
+              </Avatar>
+              <Typography fontSize="20px">Payment Details</Typography>
+            </FlexBox>
+
+            <Typography mb="0.75rem">Upload your ABA Screenshot</Typography>
+            <Row>
+              <Col md={4}>
+                <div
+                  style={{ display: filename.src ? "none" : "inline-block" }}
+                >
+                  <UploadImage
+                    onSuccess={(e) => {
+                      setFilename(e);
+                    }}
+                  />
+                </div>
+
+                {imageNode}
+              </Col>
+            </Row>
+          </Card1>
+
+          <Card1 mb="1.5rem">
+            <FlexBox alignItems="center" mb="1.75rem">
+              <Avatar
+                bg="primary.main"
+                size={32}
+                color="primary.text"
+                mr="0.875rem"
+              >
+                2
               </Avatar>
               <Typography fontSize="20px">Delivery Details</Typography>
             </FlexBox>
@@ -118,7 +186,7 @@ const CheckoutForm2 = () => {
                 color="primary.text"
                 mr="0.875rem"
               >
-                2
+                3
               </Avatar>
               <Typography fontSize="20px">Personal Details</Typography>
             </FlexBox>
@@ -207,9 +275,17 @@ const CheckoutForm2 = () => {
             type="submit"
             fullwidth
             onClick={onCheckout}
+            disabled={filename?.src ? false : true}
           >
-            Place Order
+            Place the order
           </Button>
+          <Typography mt="20px">
+            <Typography fontWeight="700" as="span">
+              Note:
+            </Typography>{" "}
+            You need to upload your ABA screenshot to place the order. After you
+            placed the order we will contact you for the confirmation.
+          </Typography>
         </Box>
       </Grid>
     </Grid>

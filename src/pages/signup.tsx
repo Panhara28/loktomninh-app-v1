@@ -9,7 +9,9 @@ const SignUpPage = () => {
       minHeight="100vh"
       alignItems="center"
       justifyContent="center"
+      className="mx-2"
     >
+      <img src="/assets/images/logo/brand.png" />
       <Signup />
     </FlexBox>
   );
