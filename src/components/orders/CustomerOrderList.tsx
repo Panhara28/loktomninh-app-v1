@@ -26,7 +26,7 @@ const CustomerOrderList: React.FC<CustomerOrderListProps> = () => {
 
   const { data, loading } = useQuery(ORDER_LIST, {
     variables: {
-      limit: 3,
+      limit: 10,
       offset: page,
       status: filter.label,
     },
@@ -36,7 +36,7 @@ const CustomerOrderList: React.FC<CustomerOrderListProps> = () => {
     await setFilter(filter);
   };
 
-  if (loading || !data) return <div>Loading...</div>;
+  if (loading || !data) return <></>;
 
   return (
     <div>

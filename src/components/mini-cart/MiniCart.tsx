@@ -37,7 +37,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
             height="calc(100% - 80px)"
           >
             <LazyImage
-              src="/assets/images/logos/shopping-bag.svg"
+              src="/assets/images/icons/no-shopping-cart.svg"
               width="90px"
               height="100%"
             />

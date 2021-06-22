@@ -1,0 +1,48 @@
+.confessionBox {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #e84393;
+  background: #e8439310;
+}
+
+.imageContainer {
+  position: relative;
+  display: inline-block;
+  border: 2px dashed #e84393;
+  border-radius: 5px;
+
+  .imageUploadingContainer {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .imageUploading {
+      color: #e84393;
+      margin: auto;
+      font-size: 40px;
+    }
+  }
+
+  .image {
+    max-width: 100%;
+    width: 350px;
+    min-height: 100px;
+    height: auto;
+  }
+
+  .imageRemove {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+}

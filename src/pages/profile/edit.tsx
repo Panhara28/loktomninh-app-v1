@@ -140,7 +140,7 @@ const ProfileEditor = () => {
           <ContactsForm input={contacts} setInput={setContacts} />
         </ContactContainer>
       </Card1>
-      <Card1 mt="20px">
+      <Card1 mt="20px" mb="50px">
         <p>Delivery Address</p>
         <AddressContainer>
           <DeliveryForm input={locations} setInput={setLocation} />
