@@ -4,7 +4,7 @@ import { getTheme } from "../../utils/utils";
 const StyledTopbar = styled.div`
   background: ${getTheme("colors.secondary.main")};
   color: white;
-  height: 40px;
+  height: 60px;
   font-size: 12px;
 
   .topbar-left {
