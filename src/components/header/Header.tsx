@@ -12,9 +12,6 @@ import Sidenav from "../sidenav/Sidenav";
 import { Tiny } from "../Typography";
 import StyledHeader from "./HeaderStyle";
 import { useCart } from "react-use-cart";
-import UserLoginDialog from "./UserLoginDialog";
-import Box from "@component/Box";
-import Login from "@component/sessions/Login";
 
 type HeaderProps = {
   isFixed?: boolean;
