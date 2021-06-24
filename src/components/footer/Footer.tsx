@@ -28,9 +28,10 @@ const Footer: React.FC = () => {
                 </Link>
 
                 <Paragraph mb="1.25rem" color="gray.500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Auctor libero id et, in gravida. Sit diam duis mauris nulla
-                  cursus. Erat et lectus vel ut sollicitudin elit at amet.
+                  Loktomninh is a start up online store platform that offers a
+                  wide range of products for the needs of customers in Cambodia.
+                  You can easily purchase your order using our App. loktomninh
+                  buy your product here.
                 </Paragraph>
 
                 <AppStore />

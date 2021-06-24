@@ -6,6 +6,7 @@ import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
+import { SEO } from "@component/Seo";
 import TableRow from "@component/TableRow";
 import Typography, { H3, H5, Small } from "@component/Typography";
 import { format } from "date-fns";
@@ -14,7 +15,8 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div>
+    <>
+      <SEO />
       <DashboardPageHeader
         iconName="user_filled"
         title="My Profile"
@@ -121,7 +123,7 @@ const Profile = () => {
           </span>
         </FlexBox>
       </TableRow>
-    </div>
+    </>
   );
 };
 
