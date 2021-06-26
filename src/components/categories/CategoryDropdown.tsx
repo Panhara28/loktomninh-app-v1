@@ -35,7 +35,7 @@ const CategoryDropdown: React.FC<CategoryDropdownProps> = ({
             <CategoryMenuItem
               title={category_name}
               href={`/category/${slug}`}
-              icon={dataImage.preview}
+              icon={dataImage?.preview}
               key={category_name}
             ></CategoryMenuItem>
           );
