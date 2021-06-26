@@ -48,7 +48,7 @@ const list = [
   {
     title: "Category",
     icon: "category",
-    href: "/category/detail/fruites-and-vegetables",
+    href: "/category/detail/gaming-gear",
   },
   {
     title: "Cart",

@@ -12,8 +12,9 @@ const MobileCategoryImageBox: React.FC<MobileCategoryImageBoxProps> = ({
   product_name,
   image,
 }) => {
-  console.log(product_name, image);
-  const imgUrl = image[0]?.preview;
+  const imgUrl = image
+    ? image[0]?.preview
+    : "https://www.lehelmatyus.com/wp-content/uploads/woocommerce-placeholder-800x800.png";
   return (
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
       <LazyImage

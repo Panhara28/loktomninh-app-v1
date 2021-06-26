@@ -42,6 +42,7 @@ export const GET_CATEGORY_LIST = gql`
       category_name
       image
       slug
+      parent
       product {
         product_name
         slug
