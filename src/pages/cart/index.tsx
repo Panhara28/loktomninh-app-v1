@@ -18,13 +18,25 @@ import { CHECKOUT, GET_CUSTOMER_LOGGED } from "lib/graph";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, ReactNode, useState } from "react";
 import { useContext } from "react";
 import { useCart } from "react-use-cart";
+import { UploadImage } from "@component/upload";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import style from "./styles.module.scss";
 
 const Cart = () => {
   const router = useRouter();
+  let uploadingImageNode: ReactNode;
+  let imageNode: ReactNode;
+  const [filename, setFilename] = useState<any>({});
   const { customer } = useContext(AuthContext);
+
+  if (!customer) {
+    router.push("/login");
+  }
+
   const { items, cartTotal, emptyCart } = useCart();
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
@@ -58,13 +70,13 @@ const Cart = () => {
           input: dataCheckout,
           phone_number: phone_number[0].phone_number,
           address: location[0].location,
+          aba_image: filename?.src,
         },
       });
     } else {
       router.push("/cart");
       toastr.warning("No item in the cart");
     }
-
   };
 
   const { data, loading } = useQuery(GET_CUSTOMER_LOGGED, {
@@ -90,8 +102,35 @@ const Cart = () => {
     },
   });
 
-  if (!customer) {
-    router.push("/login");
+  // Handle Image Uploading
+  if (filename.loading) {
+    uploadingImageNode = (
+      <div className={style.imageUploadingContainer}>
+        <div className={style.imageUploading}>
+          <FontAwesomeIcon icon={faCog} spin={true} /> Uploading...
+        </div>
+      </div>
+    );
+  }
+
+  if (filename.src) {
+    imageNode = (
+      <div className={style.imageContainer}>
+        <img className={style.image} src={filename.src} />
+        <div
+          className={style.imageRemove}
+          onClick={() => {
+            setFilename({});
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faTimesCircle}
+            style={{ color: "#e74c3c", fontSize: 30 }}
+          />
+        </div>
+        {uploadingImageNode}
+      </div>
+    );
   }
 
   if (loading || data === undefined) return <></>;
@@ -100,10 +139,11 @@ const Cart = () => {
     <Fragment>
       <Grid container className="mt-3 mx-2">
         <Grid item lg={8} md={8} xs={12}>
-          {items.length > 0 ? (<div></div>) : (<NoCart />)}
-          {items && items.map((item) => {
-            return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
-          })}
+          {items.length > 0 ? <div></div> : <NoCart />}
+          {items &&
+            items.map((item) => {
+              return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
+            })}
         </Grid>
         <Grid item lg={4} md={4} xs={12}>
           <Card1>
@@ -123,7 +163,7 @@ const Cart = () => {
               </FlexBox>
             </FlexBox>
 
-            <Divider mb="1rem" />
+            <Divider mt="1rem" />
 
             <Box mt="1rem">
               <FlexBox alignItems="center" mb="1.75rem">
@@ -137,16 +177,18 @@ const Cart = () => {
                 </Avatar>
                 <Typography fontSize="20px">Delivery Details</Typography>
               </FlexBox>
-              <AddressContainer>
-                <DeliveryForm
-                  input={locations}
-                  setInput={setLocation}
-                  isShow={true}
+              <div style={{ display: filename.src ? "none" : "inline-block" }}>
+                <UploadImage
+                  onSuccess={(e) => {
+                    setFilename(e);
+                  }}
                 />
-              </AddressContainer>
+              </div>
+
+              {imageNode}
             </Box>
 
-            <Divider mb="1rem" />
+            <Divider mt="1rem" />
 
             <Box mt="1rem">
               <FlexBox alignItems="center" mb="1.75rem">
@@ -157,6 +199,29 @@ const Cart = () => {
                   mr="0.875rem"
                 >
                   2
+                </Avatar>
+                <Typography fontSize="20px">Delivery Details</Typography>
+              </FlexBox>
+              <AddressContainer>
+                <DeliveryForm
+                  input={locations}
+                  setInput={setLocation}
+                  isShow={true}
+                />
+              </AddressContainer>
+            </Box>
+
+            <Divider mt="1rem" />
+
+            <Box mt="1rem">
+              <FlexBox alignItems="center" mb="1.75rem">
+                <Avatar
+                  bg="primary.main"
+                  size={32}
+                  color="primary.text"
+                  mr="0.875rem"
+                >
+                  3
                 </Avatar>
                 <Typography fontSize="20px">Personal Details</Typography>
               </FlexBox>
@@ -176,6 +241,7 @@ const Cart = () => {
               mb="100px"
               mt="20px"
               onClick={onCheckout}
+              disabled={filename?.src ? false : true}
             >
               Checkout Now
             </Button>

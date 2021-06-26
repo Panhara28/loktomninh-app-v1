@@ -82,6 +82,13 @@ const Topbar: React.FC = () => {
                   </a>
                 </MenuItem>
               </Link>
+              <Link href="/orders">
+                <MenuItem>
+                  <a>
+                    <Small fontWeight="600">Your orders</Small>
+                  </a>
+                </MenuItem>
+              </Link>
               <MenuItem onClick={() => LogoutCustomeHandler()}>
                 <Small fontWeight="600">Logout</Small>
               </MenuItem>

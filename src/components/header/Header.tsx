@@ -12,6 +12,7 @@ import Sidenav from "../sidenav/Sidenav";
 import { Tiny } from "../Typography";
 import StyledHeader from "./HeaderStyle";
 import { useCart } from "react-use-cart";
+
 type HeaderProps = {
   isFixed?: boolean;
   className?: string;
@@ -79,6 +80,14 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
         </FlexBox>
 
         <FlexBox className="header-right" alignItems="center">
+          <Link href="/">
+            <a className="nav-link-home">
+              <IconButton bg="gray.200" p="12px">
+                <Icon size="20px">home</Icon>
+              </IconButton>
+            </a>
+          </Link>
+
           <Sidenav
             handle={cartHandle}
             position="right"
@@ -88,6 +97,7 @@ const Header: React.FC<HeaderProps> = ({ isFixed, className }) => {
           >
             <MiniCart toggleSidenav={toggleSidenav} />
           </Sidenav>
+
         </FlexBox>
       </Container>
     </StyledHeader>

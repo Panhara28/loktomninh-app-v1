@@ -21,7 +21,7 @@ const Error404 = () => {
       px="1rem"
     >
       <Image
-        src="/assets/images/illustrations/404.svg"
+        src="/assets/images/icons/404.svg"
         maxWidth="320px"
         width="100%"
         mb="2rem"

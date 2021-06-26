@@ -10,7 +10,7 @@ import CategorySectionCreator from "../CategorySectionCreator";
 const Section2: React.FC = () => {
   const { data, loading } = useQuery(GET_CATEGORY_LIST, {
     variables: {
-      limit: 5,
+      limit: 8,
       offset: 1,
       slug: "",
     },
@@ -41,7 +41,7 @@ const Section2: React.FC = () => {
               seeMoreLink={`/category/${category.slug}`}
             >
               <Box mt="-0.25rem" mb="-0.25rem">
-                <Carousel totalSlides={10} visibleSlides={visibleSlides}>
+                <Carousel totalSlides={12} visibleSlides={visibleSlides}>
                   {category.product.map((item, ind) => (
                     <Box py="0.25rem" key={ind}>
                       <ProductCard1

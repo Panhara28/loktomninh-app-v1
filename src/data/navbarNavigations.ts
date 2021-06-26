@@ -1,8 +1,3 @@
-const navbarNavigations = [
-  {
-    title: "Home",
-    url: "/",
-  },
-];
+const navbarNavigations = [];
 
 export default navbarNavigations;

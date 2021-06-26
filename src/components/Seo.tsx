@@ -15,12 +15,30 @@ export const SEO: React.FC<SeoProps> = ({
   image,
 }) => (
   <Head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="apple-mobile-web-app-title" content="bonik" />
+    <meta name="application-name" content="bonik" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
     <title>{title ? title + " | Loktomninh.com" : "Loktomninh.com"}</title>
     <meta
       name="description"
       content={
         description ||
-        "loktomninh is start up selling product online platform in Cambodia."
+        `  
+        Loktomninh is a start up online store platform that offers a wide range of
+        products for the needs of customers in Cambodia. You can
+        easily purchase your order using our App. loktomninh buy your
+        product here.`
       }
     />
     <meta
@@ -36,7 +54,14 @@ export const SEO: React.FC<SeoProps> = ({
     <meta
       name="og:description"
       property="og:description"
-      content={description}
+      content={
+        description ||
+        `  
+      Loktomninh is a start up online store platform that offers a wide range of
+      products for the needs of customers in Cambodia. You can
+      easily purchase your order using our App. loktomninh buy your
+      product here.`
+      }
     />
     {image ? (
       <meta property="og:image" content={`${image}`} />

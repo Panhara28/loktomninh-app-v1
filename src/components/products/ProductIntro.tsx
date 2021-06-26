@@ -31,11 +31,11 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
   const [optionIdx, setOptionIdx] = useState(0);
   const [, setActiveClass] = useState(true);
   const alreadyAddToCart = inCart(
-    properties[optionIdx === -1 ? 0 : optionIdx].id
+    properties[optionIdx === -1 ? 0 : optionIdx]?.id
   );
 
   const [sku, setSku] = useState(
-    properties.map((x) => {
+    properties && properties.map((x) => {
       const index = items.findIndex((item) => item.id === x.id);
       return {
         ...x,
@@ -85,9 +85,9 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 items[index].qty === 1
                   ? null
                   : updateItemQuantity(
-                      properties[optionIdx === -1 ? 0 : optionIdx].id,
-                      items[index].qty === 1 ? 0 : items[index].qty
-                    );
+                    properties[optionIdx === -1 ? 0 : optionIdx].id,
+                    items[index].qty === 1 ? 0 : items[index].qty
+                  );
               }}
             >
               <Icon variant="small">minus</Icon>

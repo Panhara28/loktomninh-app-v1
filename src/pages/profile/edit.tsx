@@ -13,12 +13,21 @@ import {
 import Grid from "@component/grid/Grid";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
+import { SEO } from "@component/Seo";
+import { AuthContext } from "@context/app/Auth";
 import { GET_CUSTOMER_LOGGED, UPDATE_CUSTOMER } from "lib/graph";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
 
 const ProfileEditor = () => {
   let nameDisplayInput;
+  const router = useRouter();
+  const { customer } = useContext(AuthContext);
+
+  if (!customer) {
+    router.push("/login");
+  }
 
   const [contacts, setContacts] = useState([
     { phone_number: "", active: false },
@@ -71,7 +80,8 @@ const ProfileEditor = () => {
   if (loading || data === undefined) return <div></div>;
 
   return (
-    <div>
+    <>
+      <SEO />
       <DashboardPageHeader
         iconName="user_filled"
         title="Edit Profile"
@@ -132,7 +142,7 @@ const ProfileEditor = () => {
           <ContactsForm input={contacts} setInput={setContacts} />
         </ContactContainer>
       </Card1>
-      <Card1 mt="20px">
+      <Card1 mt="20px" mb="50px">
         <p>Delivery Address</p>
         <AddressContainer>
           <DeliveryForm input={locations} setInput={setLocation} />
@@ -148,7 +158,7 @@ const ProfileEditor = () => {
           Save Changes
         </Button>
       </Card1>
-    </div>
+    </>
   );
 };
 
