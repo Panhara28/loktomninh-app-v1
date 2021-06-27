@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledCarouselCard1 = styled.div`
   text-align: left;
-  margin-left: 280px;
+  margin-left: 330px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -3,16 +3,23 @@ import Button from "../buttons/Button";
 import Typography from "../Typography";
 import { StyledCarouselCard1 } from "./CarouselCardStyle";
 
-export interface CarouselCard1Props {}
+export interface CarouselCard1Props {
+  title: string;
+  subtitle: string;
+  image: string;
+}
 
-const CarouselCard1: React.FC<CarouselCard1Props> = () => {
+const CarouselCard1: React.FC<CarouselCard1Props> = ({
+  title,
+  subtitle,
+  image,
+}) => {
   return (
     <StyledCarouselCard1>
       <div>
-        <h1 className="title">50% Off For Your First Shopping</h1>
+        <h1 className="title">{title || "Untitle"}</h1>
         <Typography color="secondary.main" mb="1.35rem">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis
-          consequat eu, quam etiam at quis ut convallis.
+          {subtitle || "Untitle"}
         </Typography>
         <Button
           className="button-link"
@@ -20,15 +27,12 @@ const CarouselCard1: React.FC<CarouselCard1Props> = () => {
           color="primary"
           p="1rem 1.5rem"
         >
-          Visit Collections
+          Visit
         </Button>
       </div>
 
       <div className="image-holder">
-        <img
-          src="https://bonik-react.vercel.app/assets/images/products/apple-watch-0.png"
-          alt="apple-watch-1"
-        />
+        <img src={image} alt={title || "Untitle"} />
       </div>
     </StyledCarouselCard1>
   );

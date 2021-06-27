@@ -220,3 +220,13 @@ export const UPLOAD = gql`
     singleUpload(file: $file)
   }
 `;
+
+export const BANNERS = gql`
+  query clientBannerList($limit: Int!, $offset: Int!) {
+    clientBannerList(limit: $limit, offset: $offset) {
+      title
+      subtitle
+      image
+    }
+  }
+`;
