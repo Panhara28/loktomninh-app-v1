@@ -7,6 +7,7 @@ export function buildTree(data: any) {
       slug: "",
       path: "",
       dataImage: "",
+      product: [],
     },
   };
 
@@ -17,6 +18,7 @@ export function buildTree(data: any) {
       name: item?.category_name as string,
       slug: item?.slug as string,
       dataImage: item?.image,
+      product: item?.product,
       path: "",
       children: [],
     };
