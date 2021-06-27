@@ -68,7 +68,7 @@ export function ContactsForm({ input, setInput, isShow }: Props) {
           );
         })}
       {isShow ? (
-        <Link href="/profile">
+        <Link href="/profile/edit">
           <AddContactBtn>
             <a>Add Contact</a>
           </AddContactBtn>

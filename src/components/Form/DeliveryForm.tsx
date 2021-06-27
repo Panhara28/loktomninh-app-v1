@@ -64,7 +64,7 @@ export function DeliveryForm({ input, setInput, isShow }: Props) {
           );
         })}
       {isShow ? (
-        <Link href="/profile">
+        <Link href="/profile/edit">
           <AddAddressBtn>
             <a>Add Address</a>
           </AddAddressBtn>
