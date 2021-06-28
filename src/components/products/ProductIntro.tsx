@@ -12,11 +12,13 @@ export interface ProductIntroProps {
   properties?: any[];
   product_name: string;
   id?: string | number;
+  product_type: string | null;
 }
 
 const ProductIntro: React.FC<ProductIntroProps> = ({
   product_name,
   properties,
+  product_type
 }) => {
   const { addItem, inCart, updateItemQuantity, items } = useCart();
   const images = properties.map((x) => x.image_url);
@@ -123,7 +125,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
       <Grid container justifyContent="center" spacing={10}>
         <Grid item md={6} xs={12} alignItems="center">
           <Box>
-            <FlexBox justifyContent="center" mb="50px">
+            <FlexBox justifyContent="center" mb="20px">
               <LazyImage
                 src={image}
                 alt={product_name}
@@ -142,11 +144,13 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
           <H1 mb="1rem">{product_name}</H1>
 
           <Box mb="24px">
-            <H2 color="primary.main" mb="4px" lineHeight="1">
+            <H2 color="primary.main" mb="10px" lineHeight="1">
               {price}$
             </H2>
 
-            <SemiSpan color="inherit">Stock Available</SemiSpan>
+            {
+              product_type === "STOCK" ? (<SemiSpan color="inherit">Stock Available</SemiSpan>) : (<SemiSpan color="inherit">2 weeks preorder</SemiSpan>)
+            }
 
             <FlexBox overflow="auto" mt="30px">
               {sku.map((property, idx) => {

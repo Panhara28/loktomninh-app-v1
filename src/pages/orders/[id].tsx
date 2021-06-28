@@ -17,7 +17,7 @@ import { ORDER_DETAIL } from "lib/graph";
 import moment from "moment-timezone";
 import React, { Fragment } from "react";
 
-type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
+// type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 
 const OrderDetails = ({ id }) => {
   const { data, loading } = useQuery(ORDER_DETAIL, {
@@ -25,18 +25,18 @@ const OrderDetails = ({ id }) => {
       id: Number(id),
     },
   });
-  const orderStatus: OrderStatus = "shipping";
-  const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
-  const stepIconList = ["package-box", "truck-1", "delivery"];
+  // const orderStatus: OrderStatus = "shipping";
+  // const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
+  // const stepIconList = ["package-box", "truck-1", "delivery"];
 
-  const statusIndex = orderStatusList.indexOf(orderStatus);
+  // const statusIndex = orderStatusList.indexOf(orderStatus);
   const width = useWindowSize();
   const breakpoint = 350;
 
   if (loading || !data) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div style={{ marginBottom: 60 }}>
       <DashboardPageHeader
         title="Order Details"
         iconName="bag_filled"
@@ -55,7 +55,81 @@ const OrderDetails = ({ id }) => {
           flexWrap="wrap"
           my="2rem"
         >
-          {stepIconList.map((item, ind) => (
+          <Fragment>
+            <Box position="relative">
+              <Avatar
+                size={64}
+                bg={data.clientOrderDetail.status !== "PENDING" ? "primary.main" : "gray.300"}
+                color={data.clientOrderDetail.status !== "PENDING" ? "gray.white" : "primary.main"}
+              >
+                <Icon size="32px" defaultcolor="currentColor">
+                  package-box
+                </Icon>
+              </Avatar>
+              {data.clientOrderDetail.status !== "PENDING" ? (<Box position="absolute" right="0" top="0">
+                <Avatar size={22} bg="gray.200" color="success.main">
+                  <Icon size="12px" defaultcolor="currentColor">
+                    done
+                  </Icon>
+                </Avatar>
+              </Box>) : (<></>)}
+
+            </Box>
+            <Box
+              flex={width < breakpoint ? "unset" : "1 1 0"}
+              height={width < breakpoint ? 50 : 4}
+              minWidth={width < breakpoint ? 4 : 50}
+              bg="primary.main"
+            />
+            <Box position="relative">
+              <Avatar
+                size={64}
+                bg={data.clientOrderDetail.status !== "APRROVED" ? "primary.main" : "gray.300"}
+                color={data.clientOrderDetail.status !== "APRROVED" ? "gray.white" : "primary.main"}
+              >
+                <Icon size="32px" defaultcolor="currentColor">
+                  truck-1
+                </Icon>
+              </Avatar>
+
+              {data.clientOrderDetail.status !== "APRROVED" ? (<Box position="absolute" right="0" top="0">
+                <Avatar size={22} bg="gray.200" color="success.main">
+                  <Icon size="12px" defaultcolor="currentColor">
+                    done
+                  </Icon>
+                </Avatar>
+              </Box>) : (<></>)}
+            </Box>
+            <Box
+              flex={width < breakpoint ? "unset" : "1 1 0"}
+              height={width < breakpoint ? 50 : 4}
+              minWidth={width < breakpoint ? 4 : 50}
+              bg="primary.main"
+            />
+            <Box position="relative">
+              <Avatar
+                size={64}
+                bg="primary.main"
+                // bg={ind <= statusIndex ? "primary.main" : "gray.300"}
+                // color={ind <= statusIndex ? "gray.white" : "primary.main"}
+                color="gray.white"
+              >
+                <Icon size="32px" defaultcolor="currentColor">
+                  delivery
+                </Icon>
+              </Avatar>
+
+              <Box position="absolute" right="0" top="0">
+                <Avatar size={22} bg="gray.200" color="success.main">
+                  <Icon size="12px" defaultcolor="currentColor">
+                    done
+                  </Icon>
+                </Avatar>
+              </Box>
+            </Box>
+
+          </Fragment>
+          {/* {stepIconList.map((item, ind) => (
             <Fragment key={item}>
               <Box position="relative">
                 <Avatar
@@ -86,7 +160,7 @@ const OrderDetails = ({ id }) => {
                 />
               )}
             </Fragment>
-          ))}
+          ))} */}
         </FlexBox>
 
         <FlexBox justifyContent={width < breakpoint ? "center" : "flex-end"}>

@@ -23,6 +23,7 @@ export const GET_PRODUCT = gql`
       product_name
       image
       description
+      product_type
       properties {
         id
         price
@@ -198,6 +199,7 @@ export const ORDER_DETAIL = gql`
       total
       address
       phone_number
+      status
       order_items {
         qty
         unit_price

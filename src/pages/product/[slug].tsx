@@ -49,9 +49,12 @@ const ProductDetails = ({ slug }) => {
 
       <Box mb="100px">
         {selectedOption === "description" && (
-          <ProductDescription
-            description={data.clientProductDetail.description}
-          />
+          <div className="product-description">
+            <ProductDescription
+              description={data.clientProductDetail.description}
+            />
+          </div>
+
         )}
       </Box>
     </div>

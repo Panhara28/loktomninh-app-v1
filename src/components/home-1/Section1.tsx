@@ -20,7 +20,7 @@ const Section1: React.FC = () => {
   return (
     <Fragment>
       <Navbar navListOpen={true} />
-      <Box bg="gray.white" mb="3.75rem">
+      <Box bg="gray.white" mb="1.75rem">
         <Container pb="2rem">
           <Carousel
             totalSlides={data && data?.clientBannerList?.length}

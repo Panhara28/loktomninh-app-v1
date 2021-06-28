@@ -20,10 +20,10 @@ const Section2: React.FC = () => {
   const width = useWindowSize();
 
   useEffect(() => {
-    if (width < 500) setVisibleSlides(1);
+    if (width < 500) setVisibleSlides(2);
     else if (width < 650) setVisibleSlides(2);
     else if (width < 950) setVisibleSlides(3);
-    else setVisibleSlides(4);
+    else setVisibleSlides(6);
   }, [width]);
 
   if (loading || !data) return <></>;

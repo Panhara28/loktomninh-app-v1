@@ -120,6 +120,13 @@ $time: 300ms;
   background: rgba(15, 52, 96, 1);
 }
 
-.nav-link-home:hover{
-  color: #E94560;
+.nav-link-home:hover {
+  color: #e94560;
+}
+
+.product-description {
+  li {
+    line-height: 1.8rem;
+    font-size: 14px;
+  }
 }

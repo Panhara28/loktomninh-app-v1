@@ -40,84 +40,86 @@ const MobileCategoryNav = () => {
   const categorizes = buildTree(data && data?.clientCategoryList).root.children;
 
   return (
-    <MobileCategoryNavStyle>
-      <Header className="header" />
-      <div className="main-category-holder">
-        {categorizes.map((item) => {
-          const dataImage = item?.dataImage.filter(
-            (image) => image.isPrimary === true
-          )[0];
-          return (
-            <Box
-              className="main-category-box"
-              borderLeft={`${category?.href === item.href ? "3" : "0"}px solid`}
-              onClick={handleCategoryClick(item.children)}
-              key={item?.name}
-            >
-              <Icon size="28px" mb="0.5rem">
-                {dataImage?.preview}
-              </Icon>
-              <Typography
-                className="ellipsis"
-                textAlign="center"
-                fontSize="11px"
-                lineHeight="1"
-              >
-                {item?.name}
-              </Typography>
-            </Box>
-          );
-        })}
-      </div>
-      <Box className="container">
-        {subCategoryList &&
-          subCategoryList.map((item, ind) => {
+    <>
+      <MobileCategoryNavStyle>
+        <Header className="header" />
+        <div className="main-category-holder">
+          {categorizes.map((item) => {
+            const dataImage = item?.dataImage.filter(
+              (image) => image.isPrimary === true
+            )[0];
             return (
-              <Fragment key={ind}>
-                <Divider />
-                <Accordion>
-                  <AccordionHeader px="0px" py="10px">
-                    <Typography fontWeight="600" fontSize="15px">
-                      {item.name}
-                    </Typography>
-                  </AccordionHeader>
-                  <Box mb="2rem" mt="0.5rem" width="75%">
-                    <Grid container spacing={3}>
-                      {item?.product?.slice(0, 12).map((item, ind) => (
-                        <Grid item lg={1} md={2} sm={3} xs={4} key={ind}>
-                          <Link href={`/product/${item.slug}`}>
-                            <a>
-                              <MobileCategoryImageBox {...item} />
-                            </a>
-                          </Link>
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Box>
-                </Accordion>
-              </Fragment>
+              <Box
+                className="main-category-box"
+                borderLeft={`${category?.href === item.href ? "3" : "0"}px solid`}
+                onClick={handleCategoryClick(item.children)}
+                key={item?.name}
+              >
+                <Icon size="28px" mb="0.5rem">
+                  {dataImage?.preview}
+                </Icon>
+                <Typography
+                  className="ellipsis"
+                  textAlign="center"
+                  fontSize="11px"
+                  lineHeight="1"
+                >
+                  {item?.name}
+                </Typography>
+              </Box>
             );
           })}
+        </div>
+        <Box className="container">
+          {subCategoryList &&
+            subCategoryList.map((item, ind) => {
+              return (
+                <Fragment key={ind}>
+                  <Divider />
+                  <Accordion>
+                    <AccordionHeader px="0px" py="10px">
+                      <Typography fontWeight="600" fontSize="15px">
+                        {item.name}
+                      </Typography>
+                    </AccordionHeader>
+                    <Box mb="2rem" mt="0.5rem" width="75%">
+                      <Grid container spacing={3}>
+                        {item?.product?.slice(0, 12).map((item, ind) => (
+                          <Grid item lg={1} md={2} sm={3} xs={4} key={ind}>
+                            <Link href={`/product/${item.slug}`}>
+                              <a>
+                                <MobileCategoryImageBox {...item} />
+                              </a>
+                            </Link>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Box>
+                  </Accordion>
+                </Fragment>
+              );
+            })}
 
-        <Typography fontWeight="600" fontSize="15px" mb="1rem">
-          Recommended Categories
-        </Typography>
-        <Box mb="2rem" width="75%">
-          <Grid container spacing={2}>
-            {data.clientCategoryList.map((item, ind) => (
-              <Grid item lg={1} md={2} sm={3} xs={3} key={ind}>
-                <Link href={`/category/${item.slug}`}>
-                  <a>
-                    <MobileCategoryImageBox {...item} />
-                  </a>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
+          <Typography fontWeight="600" fontSize="15px" mb="1rem">
+            Recommended Categories
+          </Typography>
+          <Box mb="2rem" width="75%">
+            <Grid container spacing={4}>
+              {data.clientCategoryList.map((item, ind) => (
+                <Grid item lg={1} md={2} sm={3} xs={3} key={ind}>
+                  <Link href={`/category/${item.slug}`}>
+                    <a>
+                      <MobileCategoryImageBox {...item} />
+                    </a>
+                  </Link>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
         </Box>
-      </Box>
-      <MobileNavigationBar />
-    </MobileCategoryNavStyle>
+        <MobileNavigationBar />
+      </MobileCategoryNavStyle>
+    </>
   );
 };
 

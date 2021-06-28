@@ -18,9 +18,16 @@ export const StyledCarouselCard1 = styled.div`
   .image-holder {
     position: relative;
     //   width: 50%;
+    
     img {
       width: 100%;
     }
+    @media only screen and (max-width: 900px){
+      img {
+        width: 170px;
+      }
+    }
+
   }
 
   @media only screen and (max-width: 900px) {
