@@ -8,7 +8,7 @@ const AppStore: React.FC = () => {
   return (
     <FlexBox flexWrap="wrap" m="-0.5rem">
       {appList.map((item) => (
-        <a href="/" key={item.title} target="_blank" rel="noreferrer noopener">
+        <a href="#" key={item.title} rel="noreferrer noopener">
           <Box
             display="flex"
             alignItems="center"

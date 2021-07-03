@@ -14,8 +14,14 @@ type MiniCartProps = {
 };
 
 const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
-  const { totalUniqueItems, items, updateItemQuantity, removeItem, cartTotal } =
-    useCart();
+  const {
+    totalItems,
+    totalUniqueItems,
+    items,
+    updateItemQuantity,
+    removeItem,
+    cartTotal,
+  } = useCart();
 
   return (
     <StyledMiniCart>
@@ -69,7 +75,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
                   <Icon variant="small">plus</Icon>
                 </Button>
                 <Typography fontWeight={600} fontSize="15px" my="3px">
-                  {item.itemTotal}
+                  {totalItems}
                 </Typography>
                 <Button
                   variant="outlined"
@@ -166,7 +172,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ toggleSidenav }) => {
 };
 
 MiniCart.defaultProps = {
-  toggleSidenav: () => { },
+  toggleSidenav: () => {},
 };
 
 export default MiniCart;

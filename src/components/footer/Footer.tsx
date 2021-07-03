@@ -126,14 +126,7 @@ const Footer: React.FC = () => {
 };
 
 const iconList = [
-  { iconName: "facebook", url: "https://www.facebook.com/UILibOfficial" },
-  { iconName: "twitter", url: "/" },
-  {
-    iconName: "youtube",
-    url: "https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg",
-  },
-  { iconName: "google", url: "/" },
-  { iconName: "instagram", url: "/" },
+  { iconName: "facebook", url: "https://www.facebook.com/loktomninh" },
 ];
 
 export default Footer;

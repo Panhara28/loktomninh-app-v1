@@ -18,7 +18,7 @@ export interface ProductIntroProps {
 const ProductIntro: React.FC<ProductIntroProps> = ({
   product_name,
   properties,
-  product_type
+  product_type,
 }) => {
   const { addItem, inCart, updateItemQuantity, items } = useCart();
   const images = properties.map((x) => x.image_url);
@@ -37,13 +37,14 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
   );
 
   const [sku, setSku] = useState(
-    properties && properties.map((x) => {
-      const index = items.findIndex((item) => item.id === x.id);
-      return {
-        ...x,
-        qty: Number(items[index]?.quantity || 0),
-      };
-    })
+    properties &&
+      properties.map((x) => {
+        const index = items.findIndex((item) => item.id === x.id);
+        return {
+          ...x,
+          qty: Number(items[index]?.quantity || 0),
+        };
+      })
   );
 
   const onChangeImage = (idx, optionIdx, price, image_url) => {
@@ -87,9 +88,9 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 items[index].qty === 1
                   ? null
                   : updateItemQuantity(
-                    properties[optionIdx === -1 ? 0 : optionIdx].id,
-                    items[index].qty === 1 ? 0 : items[index].qty
-                  );
+                      properties[optionIdx === -1 ? 0 : optionIdx].id,
+                      items[index].qty === 1 ? 0 : items[index].qty
+                    );
               }}
             >
               <Icon variant="small">minus</Icon>
@@ -148,9 +149,11 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
               {price}$
             </H2>
 
-            {
-              product_type === "STOCK" ? (<SemiSpan color="inherit">Stock Available</SemiSpan>) : (<SemiSpan color="inherit">2 weeks preorder</SemiSpan>)
-            }
+            {product_type === "STOCK" ? (
+              <SemiSpan color="inherit">Stock Available</SemiSpan>
+            ) : (
+              <SemiSpan color="inherit">2 weeks preorder</SemiSpan>
+            )}
 
             <FlexBox overflow="auto" mt="30px">
               {sku.map((property, idx) => {
