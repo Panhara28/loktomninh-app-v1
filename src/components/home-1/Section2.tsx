@@ -35,6 +35,7 @@ const Section2: React.FC = () => {
           if (category.product.length === 0) {
             return <div></div>;
           }
+
           return (
             <CategorySectionCreator
               title={category.category_name}
@@ -42,18 +43,20 @@ const Section2: React.FC = () => {
             >
               <Box mt="-0.25rem" mb="-0.25rem">
                 <Carousel totalSlides={12} visibleSlides={visibleSlides}>
-                  {category.product.map((item, ind) => (
-                    <Box py="0.25rem" key={ind}>
-                      <ProductCard1
-                        id={ind}
-                        image={item.image}
-                        key={ind}
-                        product_name={item.product_name}
-                        properties={item.properties}
-                        slug={item.slug}
-                      />
-                    </Box>
-                  ))}
+                  {category?.product.map((item, ind) => {
+                    return (
+                      <Box py="0.25rem" key={ind}>
+                        <ProductCard1
+                          id={ind}
+                          image={item.image}
+                          key={ind}
+                          product_name={item.product_name}
+                          slug={item.slug}
+                          price={item.price}
+                        />
+                      </Box>
+                    );
+                  })}
                 </Carousel>
               </Box>
             </CategorySectionCreator>

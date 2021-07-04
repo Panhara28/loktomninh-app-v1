@@ -13,18 +13,18 @@ export interface ProductCard1Props extends CardProps {
   className?: string;
   style?: CSSProperties;
   product_name?: string;
-  properties?: any[];
   slug?: string;
   image?: any[];
   id?: number;
+  price?: string;
 }
 
 const ProductCard1: React.FC<ProductCard1Props> = ({
   product_name,
-  properties,
   image,
   slug,
   id,
+  price,
   ...props
 }) => {
   const primaryImage = image?.filter((image) => image.isPrimary === true)[0];
@@ -78,7 +78,7 @@ const ProductCard1: React.FC<ProductCard1Props> = ({
 
             <FlexBox alignItems="center" mt="10px">
               <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                ${Number(properties && properties[0]?.price).toFixed(2)}
+                ${Number(price).toFixed(2)}
               </SemiSpan>
             </FlexBox>
           </Box>
