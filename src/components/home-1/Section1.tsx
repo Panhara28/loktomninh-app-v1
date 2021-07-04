@@ -40,6 +40,7 @@ const Section1: React.FC = () => {
                   title={banner?.title}
                   subtitle={banner?.subtitle}
                   image={primaryImage?.preview}
+                  url_button={banner?.url_button}
                 />
               );
             })}

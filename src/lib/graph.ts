@@ -235,6 +235,7 @@ export const BANNERS = gql`
       title
       subtitle
       image
+      url_button
     }
   }
 `;
