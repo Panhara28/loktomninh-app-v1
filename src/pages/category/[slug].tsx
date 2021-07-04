@@ -9,16 +9,13 @@ import React from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 
 const CategoryDetail = (props) => {
-  const { loading, error, fetchMore, data } = useQuery(
-    GET_CATEGORY_LIST_DETAIL,
-    {
-      variables: {
-        slug: props.slug,
-        limit: 20,
-        offset: 0,
-      },
-    }
-  );
+  const { loading, fetchMore, data } = useQuery(GET_CATEGORY_LIST_DETAIL, {
+    variables: {
+      slug: props.slug,
+      limit: 20,
+      offset: 0,
+    },
+  });
 
   const [setRef, more, isLoading]: any = useOnScreenCategory(
     { threshold: 1 },
@@ -26,8 +23,6 @@ const CategoryDetail = (props) => {
   );
 
   if (loading || data === undefined) return <></>;
-
-  if (error) return `Error! ${error}`;
 
   let renderProduct;
 

@@ -8,7 +8,7 @@ import { SEARCH_PRODUCTS } from "lib/graph";
 import React from "react";
 
 const ProductSearch = (props) => {
-  const { loading, error, data } = useQuery(SEARCH_PRODUCTS, {
+  const { loading, data } = useQuery(SEARCH_PRODUCTS, {
     variables: {
       search: reverseSlug(props.product_name),
       limit: 1000,
@@ -17,8 +17,6 @@ const ProductSearch = (props) => {
   });
 
   if (loading || data === undefined) return <></>;
-
-  if (error) return `Error! ${error}`;
 
   let renderProduct;
 
