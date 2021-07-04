@@ -85,6 +85,7 @@ export const GET_CATEGORY_LIST_DETAIL = gql`
         product_name
         image
         slug
+        price
         properties {
           id
           price
