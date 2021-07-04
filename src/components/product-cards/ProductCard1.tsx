@@ -28,7 +28,6 @@ const ProductCard1: React.FC<ProductCard1Props> = ({
   ...props
 }) => {
   const primaryImage = image?.filter((image) => image.isPrimary === true)[0];
-
   return (
     <StyledProductCard1 {...props}>
       <div className="image-holder">
@@ -79,7 +78,7 @@ const ProductCard1: React.FC<ProductCard1Props> = ({
 
             <FlexBox alignItems="center" mt="10px">
               <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                ${(10).toFixed(2)}
+                ${Number(properties && properties[0]?.price).toFixed(2)}
               </SemiSpan>
             </FlexBox>
           </Box>

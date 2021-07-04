@@ -23,7 +23,7 @@ const MegaMenu2: React.FC<MegaMenu2Props> = ({ data }) => {
           return (
             <CategoryMenuItem
               title={item?.name}
-              href={item?.slug}
+              href={`/category/${item?.slug}`}
               icon={dataImage?.preview}
               caret={!!!item?.children}
               key={item?.name}
