@@ -32,6 +32,7 @@ const ProductDetails = ({ slug }) => {
           ""
         )}
         image={data.clientProductDetail.properties[0].image_url}
+        canonical={`https//loktomninh.com/product${data.clientProductDetail.slug}`}
       />
       <ProductIntro {...data.clientProductDetail} />
 

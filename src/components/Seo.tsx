@@ -30,6 +30,11 @@ export const SEO: React.FC<SeoProps> = ({
     <meta name="theme-color" content="#ffffff" />
 
     <title>{title ? title + " | Loktomninh.com" : "Loktomninh.com"}</title>
+    {image ? (
+      <meta property="og:image" content={`${image}`} />
+    ) : (
+      <meta property="og:image" content={`${image}`} />
+    )}
     <meta
       name="description"
       content={
@@ -49,7 +54,7 @@ export const SEO: React.FC<SeoProps> = ({
     <meta
       name="og:title"
       property="og:title"
-      content={title + " | loktomninh.com"}
+      content={title ? title + " | Loktomninh.com" : "Loktomninh.com"}
     />
     <meta
       name="og:description"
@@ -63,22 +68,12 @@ export const SEO: React.FC<SeoProps> = ({
       product here.`
       }
     />
-    {image ? (
-      <meta property="og:image" content={`${image}`} />
-    ) : (
-      <meta property="og:image" content={`${image}`} />
-    )}
+
     <meta property="og:site_name" content="loktomninh.com" />
     <meta
       property="og:url"
       content={`${canonical ? canonical : "loktomninh.com"}`}
     />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:site" content="@loktomninh.com" />
-    <meta name="twitter:creator" content="@loktomninh.com" />
-    {image && <meta name="twitter:image" content={`${image}`} />}
 
     {canonical && (
       <link
