@@ -168,6 +168,7 @@ export const CHECKOUT = gql`
 export const SEARCH_PRODUCTS = gql`
   query clientProductSearch($limit: Int!, $offset: Int!, $search: String) {
     clientProductSearch(limit: $limit, offset: $offset, search: $search) {
+      price
       product_name
       slug
       image
