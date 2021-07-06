@@ -7,6 +7,7 @@ import { H5 } from "@component/Typography";
 import { GET_PRODUCT } from "lib/graph";
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
+import { SEO } from "@component/Seo";
 const ProductDetails = ({ slug }) => {
   const { data, loading } = useQuery(GET_PRODUCT, {
     variables: {
@@ -24,6 +25,14 @@ const ProductDetails = ({ slug }) => {
 
   return (
     <div>
+      <SEO
+        title={data.clientProductDetail.product_name}
+        description={data.clientProductDetail.description.replace(
+          /<[^>]+>/g,
+          ""
+        )}
+        image={data.clientProductDetail.properties[0].image_url}
+      />
       <ProductIntro {...data.clientProductDetail} />
 
       <FlexBox
@@ -54,7 +63,6 @@ const ProductDetails = ({ slug }) => {
               description={data.clientProductDetail.description}
             />
           </div>
-
         )}
       </Box>
     </div>

@@ -146,7 +146,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                     md={2}
                     xs={3}
                     alignItems="center"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: 5 }}
                   >
                     <LazyImage
                       src={property.image_url}
