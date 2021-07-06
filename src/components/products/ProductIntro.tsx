@@ -138,6 +138,38 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 unoptimized={true}
               />
             </FlexBox>
+            <FlexBox overflow="auto" mt="20px">
+              {sku.map((property, idx) => {
+                return (
+                  <Grid
+                    item
+                    md={2}
+                    xs={3}
+                    alignItems="center"
+                    style={{ marginRight: 10 }}
+                  >
+                    <LazyImage
+                      src={property.image_url}
+                      alt={"No Image"}
+                      height="70px"
+                      width="70px"
+                      loading="eager"
+                      objectFit="contain"
+                      priority={true}
+                      unoptimized={true}
+                      onClick={() =>
+                        onChangeImage(
+                          idx,
+                          optionIdx,
+                          property.price,
+                          property.image_url
+                        )
+                      }
+                    />
+                  </Grid>
+                );
+              })}
+            </FlexBox>
           </Box>
         </Grid>
 
@@ -154,30 +186,6 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
             ) : (
               <SemiSpan color="inherit">2 weeks preorder</SemiSpan>
             )}
-
-            <FlexBox overflow="auto" mt="30px">
-              {sku.map((property, idx) => {
-                return (
-                  <Button
-                    className="button-link"
-                    variant="contained"
-                    color="primary"
-                    p="1rem 1.5rem"
-                    mr="1rem"
-                    onClick={() =>
-                      onChangeImage(
-                        idx,
-                        optionIdx,
-                        property.price,
-                        property.image_url
-                      )
-                    }
-                  >
-                    {property.property}
-                  </Button>
-                );
-              })}
-            </FlexBox>
 
             {sku.map((_, index) => {
               if (optionIdx !== index) return <div />;
