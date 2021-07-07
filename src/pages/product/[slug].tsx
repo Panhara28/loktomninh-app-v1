@@ -24,7 +24,7 @@ const ProductDetails = ({ slug }) => {
   if (loading || data === undefined) return <div></div>;
 
   return (
-    <div>
+    <>
       <SEO
         title={data.clientProductDetail.product_name}
         description={data.clientProductDetail.description.replace(
@@ -35,38 +35,39 @@ const ProductDetails = ({ slug }) => {
         canonical={`https://loktomninh.com/product/${data.clientProductDetail.slug}`}
       />
       <ProductIntro {...data.clientProductDetail} />
-
-      <FlexBox
-        borderBottom="1px solid"
-        borderColor="gray.400"
-        mt="20px"
-        mb="26px"
-      >
-        <H5
-          className="cursor-pointer"
-          mr="25px"
-          p="4px 10px"
-          color={
-            selectedOption === "description" ? "primary.main" : "text.muted"
-          }
-          borderBottom={selectedOption === "description" && "2px solid"}
-          borderColor="primary.main"
-          onClick={handleOptionClick("description")}
+      <div>
+        <FlexBox
+          borderBottom="1px solid"
+          borderColor="gray.400"
+          mt="20px"
+          mb="26px"
         >
-          Description
-        </H5>
-      </FlexBox>
+          <H5
+            className="cursor-pointer"
+            mr="25px"
+            p="4px 10px"
+            color={
+              selectedOption === "description" ? "primary.main" : "text.muted"
+            }
+            borderBottom={selectedOption === "description" && "2px solid"}
+            borderColor="primary.main"
+            onClick={handleOptionClick("description")}
+          >
+            Description
+          </H5>
+        </FlexBox>
 
-      <Box mb="100px">
-        {selectedOption === "description" && (
-          <div className="product-description">
-            <ProductDescription
-              description={data.clientProductDetail.description}
-            />
-          </div>
-        )}
-      </Box>
-    </div>
+        <Box mb="100px">
+          {selectedOption === "description" && (
+            <div className="product-description">
+              <ProductDescription
+                description={data.clientProductDetail.description}
+              />
+            </div>
+          )}
+        </Box>
+      </div>
+    </>
   );
 };
 
