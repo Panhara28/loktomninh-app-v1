@@ -11,29 +11,23 @@ import { clientRequireToken } from "lib/apollo";
 import PageContent from "@component/PageContent";
 
 const ProductDetails = ({ product }) => {
-
   const [selectedOption, setSelectedOption] = useState("description");
 
   const handleOptionClick = (opt) => () => {
     setSelectedOption(opt);
   };
 
-
   return (
     <>
       <SEO
         title={product.product_name}
-        description={product.description.replace(
-          /<[^>]+>/g,
-          ""
-        )}
+        description={product.description.replace(/<[^>]+>/g, "")}
         image={product.properties[0].image_url}
         canonical={`https://loktomninh.com/product/${product.slug}`}
       />
-
       <PageContent>
-        <ProductIntro {...product} />
-        <div>
+        <NavbarLayout>
+          <ProductIntro {...product} />
           <FlexBox
             borderBottom="1px solid"
             borderColor="gray.400"
@@ -58,13 +52,11 @@ const ProductDetails = ({ product }) => {
           <Box mb="100px">
             {selectedOption === "description" && (
               <div className="product-description">
-                <ProductDescription
-                  description={product.description}
-                />
+                <ProductDescription description={product.description} />
               </div>
             )}
           </Box>
-        </div>
+        </NavbarLayout>
       </PageContent>
     </>
   );
@@ -78,12 +70,12 @@ export async function getServerSideProps(params) {
     variables: {
       slug,
     },
-  })
+  });
 
   return {
     props: {
-      product: data.clientProductDetail
-    }
+      product: data.clientProductDetail,
+    },
   };
 }
 

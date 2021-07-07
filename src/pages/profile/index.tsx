@@ -34,7 +34,12 @@ const Profile = () => {
         <Box mb="30px">
           <Grid container spacing={6}>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <FlexBox as={Card} p="14px 32px" height="100%" alignItems="center">
+              <FlexBox
+                as={Card}
+                p="14px 32px"
+                height="100%"
+                alignItems="center"
+              >
                 <Avatar src="/assets/images/faces/ralph.png" size={64} />
                 <Box ml="12px" flex="1 1 0">
                   <FlexBox
@@ -48,7 +53,11 @@ const Profile = () => {
                         <Typography fontSize="14px" color="text.hint">
                           Balance:
                         </Typography>
-                        <Typography ml="4px" fontSize="14px" color="primary.main">
+                        <Typography
+                          ml="4px"
+                          fontSize="14px"
+                          color="primary.main"
+                        >
                           $500
                         </Typography>
                       </FlexBox>
@@ -126,7 +135,19 @@ const Profile = () => {
           </FlexBox>
         </TableRow>
       </PageContent>
+    </>
+  );
+};
 
+const ProfilePage = () => {
+  return (
+    <>
+      <SEO title="Profile" />
+      <PageContent>
+        <DashboardLayout>
+          <Profile />
+        </DashboardLayout>
+      </PageContent>
     </>
   );
 };
@@ -150,6 +171,6 @@ const infoList = [
   },
 ];
 
-Profile.layout = DashboardLayout;
+// Profile.layout = DashboardLayout;
 
-export default Profile;
+export default ProfilePage;

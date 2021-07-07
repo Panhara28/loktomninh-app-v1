@@ -57,7 +57,7 @@ export function UploadImage(props: Props) {
       onClick={onClickUpload}
     >
       <div className={style.uploadBody}>
-        <FontAwesomeIcon icon={faImage} style={{ fontSize: 40 }} />
+        <FontAwesomeIcon icon={faImage} />
         Upload your ABA screenshot
       </div>
       <input

@@ -139,7 +139,6 @@ const Cart = () => {
 
   return (
     <>
-      <SEO />
       <PageContent>
         <Grid container className="mt-3 mx-2">
           <Grid item lg={8} md={8} xs={12}>
@@ -150,7 +149,7 @@ const Cart = () => {
               })}
           </Grid>
           <Grid item lg={4} md={4} xs={12}>
-            <Card1>
+            <Card1 style={{ marginBottom: 90 }}>
               <FlexBox
                 justifyContent="space-between"
                 alignItems="center"
@@ -181,7 +180,9 @@ const Cart = () => {
                   </Avatar>
                   <Typography fontSize="20px">Delivery Details</Typography>
                 </FlexBox>
-                <div style={{ display: filename.src ? "none" : "inline-block" }}>
+                <div
+                  style={{ display: filename.src ? "none" : "inline-block" }}
+                >
                   <UploadImage
                     onSuccess={(e) => {
                       setFilename(e);
@@ -242,7 +243,6 @@ const Cart = () => {
                 variant="contained"
                 color="primary"
                 fullwidth
-                mb="100px"
                 mt="20px"
                 onClick={onCheckout}
                 disabled={filename?.src ? false : true}
@@ -253,11 +253,21 @@ const Cart = () => {
           </Grid>
         </Grid>
       </PageContent>
-
     </>
   );
 };
 
-Cart.layout = AppLayout;
+const CartPage = () => {
+  return (
+    <>
+      <SEO title="Cart" />
+      <PageContent>
+        <AppLayout>
+          <Cart />
+        </AppLayout>
+      </PageContent>
+    </>
+  );
+};
 
-export default Cart;
+export default CartPage;

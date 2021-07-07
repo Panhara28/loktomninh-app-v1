@@ -43,7 +43,6 @@ const MobileCategoryNav = () => {
 
   return (
     <>
-
       <MobileCategoryNavStyle>
         <Header className="header" />
         <div className="main-category-holder">
@@ -54,7 +53,9 @@ const MobileCategoryNav = () => {
             return (
               <Box
                 className="main-category-box"
-                borderLeft={`${category?.href === item.href ? "3" : "0"}px solid`}
+                borderLeft={`${
+                  category?.href === item.href ? "3" : "0"
+                }px solid`}
                 onClick={handleCategoryClick(item.children)}
                 key={item?.name}
               >
@@ -122,7 +123,6 @@ const MobileCategoryNav = () => {
         </Box>
         <MobileNavigationBar />
       </MobileCategoryNavStyle>
-
     </>
   );
 };
@@ -130,12 +130,12 @@ const MobileCategoryNav = () => {
 const Category = () => {
   return (
     <>
-      <SEO />
+      <SEO title="Category" />
       <PageContent>
         <MobileCategoryNav />
       </PageContent>
     </>
-  )
-}
+  );
+};
 
 export default Category;

@@ -9,10 +9,7 @@ import { clientRequireToken } from "lib/apollo";
 import { GET_CATEGORY_LIST_DETAIL } from "lib/graph";
 import React from "react";
 
-
 const CategoryDetail = ({ item }) => {
-  console.log(item);
-
   // const [setRef, more, isLoading]: any = useOnScreenCategory(
   //   { threshold: 1 },
   //   fetchMore
@@ -20,21 +17,19 @@ const CategoryDetail = ({ item }) => {
 
   let renderProduct;
 
-  renderProduct =
-    item.product.map((product, ind) => {
-      return (
-        <Grid item lg={3} sm={6} xs={12} key={ind}>
-          <ProductCard1 {...product} />
-        </Grid>
-      );
-    });
+  renderProduct = item.product.map((product, ind) => {
+    return (
+      <Grid item lg={3} sm={6} xs={12} key={ind}>
+        <ProductCard1 {...product} />
+      </Grid>
+    );
+  });
 
   return (
-
     <Box pt="20px">
       <Grid container spacing={6}>
         <Grid item lg={12} xs={12}>
-          <Grid container spacing={6}>
+          <Grid container spacing={6} style={{ marginBottom: 50 }}>
             {renderProduct}
           </Grid>
           {/* {isLoading && (
@@ -49,22 +44,21 @@ const CategoryDetail = ({ item }) => {
         </Grid>
       </Grid>
     </Box>
-
   );
 };
 
 const CategoryPage = (props) => {
   return (
     <>
-      <SEO />
+      <SEO title={`${props.category.category_name}`} />
       <PageContent>
         <NavbarLayout>
           <CategoryDetail item={props} />
         </NavbarLayout>
       </PageContent>
     </>
-  )
-}
+  );
+};
 
 export async function getServerSideProps(params) {
   const { slug } = params.query;
@@ -74,16 +68,16 @@ export async function getServerSideProps(params) {
     variables: {
       slug,
       limit: 20,
-      offset: 0
-    }
-  })
+      offset: 0,
+    },
+  });
 
   return {
     props: {
-      product: data.clientCategoryDetail.product
-    }
+      product: data.clientCategoryDetail.product,
+      category: data.clientCategoryDetail,
+    },
   };
 }
-
 
 export default CategoryPage;

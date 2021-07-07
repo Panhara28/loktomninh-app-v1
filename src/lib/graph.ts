@@ -81,6 +81,7 @@ export const GET_CATEGORY_LIST_DETAIL = gql`
   query clientCategoryDetail($slug: String!, $limit: Int!, $offset: Int!) {
     clientCategoryDetail(slug: $slug, limit: $limit, offset: $offset) {
       id
+      category_name
       product {
         id
         product_name

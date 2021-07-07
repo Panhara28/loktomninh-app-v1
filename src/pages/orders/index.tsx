@@ -9,12 +9,12 @@ const Orders = () => {
     <>
       <SEO />
       <PageContent>
-        <CustomerOrderList />
+        <CustomerDashboardLayout>
+          <CustomerOrderList />
+        </CustomerDashboardLayout>
       </PageContent>
     </>
   );
 };
-
-Orders.layout = CustomerDashboardLayout;
 
 export default Orders;

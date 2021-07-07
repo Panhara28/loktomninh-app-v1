@@ -82,7 +82,6 @@ const ProfileEditor = () => {
 
   return (
     <>
-      <SEO />
       <PageContent>
         <DashboardPageHeader
           iconName="user_filled"
@@ -161,11 +160,21 @@ const ProfileEditor = () => {
           </Button>
         </Card1>
       </PageContent>
-
     </>
   );
 };
 
-ProfileEditor.layout = DashboardLayout;
+const EditProfile = () => {
+  return (
+    <>
+      <SEO title="Edit Profile" />
+      <PageContent>
+        <DashboardLayout>
+          <ProfileEditor />
+        </DashboardLayout>
+      </PageContent>
+    </>
+  );
+};
 
-export default ProfileEditor;
+export default EditProfile;

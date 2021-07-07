@@ -8,7 +8,7 @@ import PageContent from "@component/PageContent";
 const IndexPage = () => {
   return (
     <main>
-      <SEO title="loktomninh.com" />
+      <SEO title="Home" />
       <AppLayout>
         <PageContent>
           <Section1 />
@@ -19,6 +19,5 @@ const IndexPage = () => {
     </main>
   );
 };
-
 
 export default IndexPage;
