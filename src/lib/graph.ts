@@ -25,6 +25,7 @@ export const GET_PRODUCT = gql`
       image
       description
       product_type
+      slug
       properties {
         id
         price
