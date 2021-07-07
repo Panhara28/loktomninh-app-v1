@@ -18,13 +18,15 @@ import { CHECKOUT, GET_CUSTOMER_LOGGED } from "lib/graph";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { useRouter } from "next/router";
-import React, { Fragment, ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { useContext } from "react";
 import { useCart } from "react-use-cart";
 import { UploadImage } from "@component/upload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import style from "./styles.module.scss";
+import PageContent from "@component/PageContent";
+import { SEO } from "@component/Seo";
 
 const Cart = () => {
   const router = useRouter();
@@ -136,119 +138,123 @@ const Cart = () => {
   if (loading || data === undefined) return <></>;
 
   return (
-    <Fragment>
-      <Grid container className="mt-3 mx-2">
-        <Grid item lg={8} md={8} xs={12}>
-          {items.length > 0 ? <div></div> : <NoCart />}
-          {items &&
-            items.map((item) => {
-              return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
-            })}
+    <>
+      <SEO />
+      <PageContent>
+        <Grid container className="mt-3 mx-2">
+          <Grid item lg={8} md={8} xs={12}>
+            {items.length > 0 ? <div></div> : <NoCart />}
+            {items &&
+              items.map((item) => {
+                return <ProductCard7 key={item.id} mb="1.5rem" {...item} />;
+              })}
+          </Grid>
+          <Grid item lg={4} md={4} xs={12}>
+            <Card1>
+              <FlexBox
+                justifyContent="space-between"
+                alignItems="center"
+                mb="1rem"
+              >
+                <Typography color="gray.600">Total:</Typography>
+                <FlexBox alignItems="flex-end">
+                  <Typography fontSize="18px" fontWeight="600" lineHeight="1">
+                    $
+                  </Typography>
+                  <Typography fontWeight="600" fontSize="14px" lineHeight="1">
+                    {cartTotal.toFixed(2)}
+                  </Typography>
+                </FlexBox>
+              </FlexBox>
+
+              <Divider mt="1rem" />
+
+              <Box mt="1rem">
+                <FlexBox alignItems="center" mb="1.75rem">
+                  <Avatar
+                    bg="primary.main"
+                    size={32}
+                    color="primary.text"
+                    mr="0.875rem"
+                  >
+                    1
+                  </Avatar>
+                  <Typography fontSize="20px">Delivery Details</Typography>
+                </FlexBox>
+                <div style={{ display: filename.src ? "none" : "inline-block" }}>
+                  <UploadImage
+                    onSuccess={(e) => {
+                      setFilename(e);
+                    }}
+                  />
+                </div>
+
+                {imageNode}
+              </Box>
+
+              <Divider mt="1rem" />
+
+              <Box mt="1rem">
+                <FlexBox alignItems="center" mb="1.75rem">
+                  <Avatar
+                    bg="primary.main"
+                    size={32}
+                    color="primary.text"
+                    mr="0.875rem"
+                  >
+                    2
+                  </Avatar>
+                  <Typography fontSize="20px">Delivery Details</Typography>
+                </FlexBox>
+                <AddressContainer>
+                  <DeliveryForm
+                    input={locations}
+                    setInput={setLocation}
+                    isShow={true}
+                  />
+                </AddressContainer>
+              </Box>
+
+              <Divider mt="1rem" />
+
+              <Box mt="1rem">
+                <FlexBox alignItems="center" mb="1.75rem">
+                  <Avatar
+                    bg="primary.main"
+                    size={32}
+                    color="primary.text"
+                    mr="0.875rem"
+                  >
+                    3
+                  </Avatar>
+                  <Typography fontSize="20px">Personal Details</Typography>
+                </FlexBox>
+                <AddressContainer>
+                  <ContactsForm
+                    input={contacts}
+                    setInput={setContacts}
+                    isShow={true}
+                  />
+                </AddressContainer>
+              </Box>
+
+              <Button
+                variant="contained"
+                color="primary"
+                fullwidth
+                mb="100px"
+                mt="20px"
+                onClick={onCheckout}
+                disabled={filename?.src ? false : true}
+              >
+                Checkout Now
+              </Button>
+            </Card1>
+          </Grid>
         </Grid>
-        <Grid item lg={4} md={4} xs={12}>
-          <Card1>
-            <FlexBox
-              justifyContent="space-between"
-              alignItems="center"
-              mb="1rem"
-            >
-              <Typography color="gray.600">Total:</Typography>
-              <FlexBox alignItems="flex-end">
-                <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-                  $
-                </Typography>
-                <Typography fontWeight="600" fontSize="14px" lineHeight="1">
-                  {cartTotal.toFixed(2)}
-                </Typography>
-              </FlexBox>
-            </FlexBox>
+      </PageContent>
 
-            <Divider mt="1rem" />
-
-            <Box mt="1rem">
-              <FlexBox alignItems="center" mb="1.75rem">
-                <Avatar
-                  bg="primary.main"
-                  size={32}
-                  color="primary.text"
-                  mr="0.875rem"
-                >
-                  1
-                </Avatar>
-                <Typography fontSize="20px">Delivery Details</Typography>
-              </FlexBox>
-              <div style={{ display: filename.src ? "none" : "inline-block" }}>
-                <UploadImage
-                  onSuccess={(e) => {
-                    setFilename(e);
-                  }}
-                />
-              </div>
-
-              {imageNode}
-            </Box>
-
-            <Divider mt="1rem" />
-
-            <Box mt="1rem">
-              <FlexBox alignItems="center" mb="1.75rem">
-                <Avatar
-                  bg="primary.main"
-                  size={32}
-                  color="primary.text"
-                  mr="0.875rem"
-                >
-                  2
-                </Avatar>
-                <Typography fontSize="20px">Delivery Details</Typography>
-              </FlexBox>
-              <AddressContainer>
-                <DeliveryForm
-                  input={locations}
-                  setInput={setLocation}
-                  isShow={true}
-                />
-              </AddressContainer>
-            </Box>
-
-            <Divider mt="1rem" />
-
-            <Box mt="1rem">
-              <FlexBox alignItems="center" mb="1.75rem">
-                <Avatar
-                  bg="primary.main"
-                  size={32}
-                  color="primary.text"
-                  mr="0.875rem"
-                >
-                  3
-                </Avatar>
-                <Typography fontSize="20px">Personal Details</Typography>
-              </FlexBox>
-              <AddressContainer>
-                <ContactsForm
-                  input={contacts}
-                  setInput={setContacts}
-                  isShow={true}
-                />
-              </AddressContainer>
-            </Box>
-
-            <Button
-              variant="contained"
-              color="primary"
-              fullwidth
-              mb="100px"
-              mt="20px"
-              onClick={onCheckout}
-              disabled={filename?.src ? false : true}
-            >
-              Checkout Now
-            </Button>
-          </Card1>
-        </Grid>
-      </Grid>
-    </Fragment>
+    </>
   );
 };
 

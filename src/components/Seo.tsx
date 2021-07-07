@@ -15,6 +15,8 @@ export const SEO: React.FC<SeoProps> = ({
   image,
 }) => (
   <Head>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
     <title>{title ? title + " | loktomninh.com" : "loktomninh.com"}</title>
     {image ? (
       <meta property="og:image" content={`${image}`} />
@@ -31,10 +33,6 @@ export const SEO: React.FC<SeoProps> = ({
         easily purchase your order using our App. loktomninh buy your
         product here.`
       }
-    />
-    <meta
-      name="viewport"
-      content="width=device-width,minimum-scale=1,initial-scale=1"
     />
     <meta property="og:type" content="website" />
     <meta

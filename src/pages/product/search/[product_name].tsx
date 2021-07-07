@@ -2,7 +2,9 @@ import { useQuery } from "@apollo/client";
 import Box from "@component/Box";
 import Grid from "@component/grid/Grid";
 import NavbarLayout from "@component/layout/NavbarLayout";
+import PageContent from "@component/PageContent";
 import ProductCard1 from "@component/product-cards/ProductCard1";
+import { SEO } from "@component/Seo";
 import { reverseSlug } from "functions/reverseSlug";
 import { SEARCH_PRODUCTS } from "lib/graph";
 import React from "react";
@@ -31,19 +33,24 @@ const ProductSearch = (props) => {
     });
 
   return (
-    <Box pt="20px">
-      <Grid container spacing={6}>
-        <Grid item lg={12} xs={12}>
+    <>
+      <SEO />
+      <PageContent>
+        <Box pt="20px">
           <Grid container spacing={6}>
-            {data?.clientProductSearch.length === 0 ? (
-              <div>No Result</div>
-            ) : (
-              renderProduct
-            )}
+            <Grid item lg={12} xs={12}>
+              <Grid container spacing={6}>
+                {data?.clientProductSearch.length === 0 ? (
+                  <div>No Result</div>
+                ) : (
+                  renderProduct
+                )}
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </Box>
+        </Box>
+      </PageContent>
+    </>
   );
 };
 

@@ -1,10 +1,10 @@
 import Footer from "@component/footer/Footer";
 import Header from "@component/header/Header";
 import MobileNavigationBar from "@component/mobile-navigation/MobileNavigationBar";
+import PageContent from "@component/PageContent";
 import Sticky from "@component/sticky/Sticky";
 import Topbar from "@component/topbar/Topbar";
 import useWindowSize from "@hook/useWindowSize";
-import Head from "next/head";
 import React from "react";
 import StyledAppLayout from "./AppLayoutStyle";
 
@@ -16,34 +16,29 @@ type Props = {
 const AppLayout: React.FC<Props> = ({
   children,
   navbar,
-  title = "React Next.js Ecommerce Template",
 }) => {
   const width = useWindowSize();
   const isMobile = width < 769;
   return (
-    <StyledAppLayout>
-      <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+    <PageContent>
+      <StyledAppLayout>
+        <Topbar />
 
-      <Topbar />
+        <Sticky fixedOn={0}>
+          <Header />
+        </Sticky>
 
-      <Sticky fixedOn={0}>
-        <Header />
-      </Sticky>
+        {navbar && <div className="section-after-sticky">{navbar}</div>}
+        {!navbar ? (
+          <div className="section-after-sticky">{children}</div>
+        ) : (
+          children
+        )}
 
-      {navbar && <div className="section-after-sticky">{navbar}</div>}
-      {!navbar ? (
-        <div className="section-after-sticky">{children}</div>
-      ) : (
-        children
-      )}
-
-      <MobileNavigationBar />
-      {isMobile ? "" : <Footer />}
-    </StyledAppLayout>
+        <MobileNavigationBar />
+        {isMobile ? "" : <Footer />}
+      </StyledAppLayout>
+    </PageContent>
   );
 };
 

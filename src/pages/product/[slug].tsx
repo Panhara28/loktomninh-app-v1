@@ -8,6 +8,7 @@ import { GET_PRODUCT } from "lib/graph";
 import React, { useState } from "react";
 import { SEO } from "@component/Seo";
 import { clientRequireToken } from "lib/apollo";
+import PageContent from "@component/PageContent";
 
 const ProductDetails = ({ product }) => {
 
@@ -16,6 +17,7 @@ const ProductDetails = ({ product }) => {
   const handleOptionClick = (opt) => () => {
     setSelectedOption(opt);
   };
+
 
   return (
     <>
@@ -28,39 +30,42 @@ const ProductDetails = ({ product }) => {
         image={product.properties[0].image_url}
         canonical={`https://loktomninh.com/product/${product.slug}`}
       />
-      <ProductIntro {...product} />
-      <div>
-        <FlexBox
-          borderBottom="1px solid"
-          borderColor="gray.400"
-          mt="20px"
-          mb="26px"
-        >
-          <H5
-            className="cursor-pointer"
-            mr="25px"
-            p="4px 10px"
-            color={
-              selectedOption === "description" ? "primary.main" : "text.muted"
-            }
-            borderBottom={selectedOption === "description" && "2px solid"}
-            borderColor="primary.main"
-            onClick={handleOptionClick("description")}
-          >
-            Description
-          </H5>
-        </FlexBox>
 
-        <Box mb="100px">
-          {selectedOption === "description" && (
-            <div className="product-description">
-              <ProductDescription
-                description={product.description}
-              />
-            </div>
-          )}
-        </Box>
-      </div>
+      <PageContent>
+        <ProductIntro {...product} />
+        <div>
+          <FlexBox
+            borderBottom="1px solid"
+            borderColor="gray.400"
+            mt="20px"
+            mb="26px"
+          >
+            <H5
+              className="cursor-pointer"
+              mr="25px"
+              p="4px 10px"
+              color={
+                selectedOption === "description" ? "primary.main" : "text.muted"
+              }
+              borderBottom={selectedOption === "description" && "2px solid"}
+              borderColor="primary.main"
+              onClick={handleOptionClick("description")}
+            >
+              Description
+            </H5>
+          </FlexBox>
+
+          <Box mb="100px">
+            {selectedOption === "description" && (
+              <div className="product-description">
+                <ProductDescription
+                  description={product.description}
+                />
+              </div>
+            )}
+          </Box>
+        </div>
+      </PageContent>
     </>
   );
 };

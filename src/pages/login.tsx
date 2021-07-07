@@ -1,3 +1,4 @@
+import PageContent from "@component/PageContent";
 import { SEO } from "@component/Seo";
 import Link from "next/link";
 import React from "react";
@@ -8,20 +9,23 @@ const LoginPage = () => {
   return (
     <>
       <SEO />
-      <FlexBox
-        flexDirection="column"
-        minHeight="100vh"
-        alignItems="center"
-        justifyContent="center"
-        className="mx-2"
-      >
-        <Link href="/">
-          <a>
-            <img src="/assets/images/logo/brand.png" />
-          </a>
-        </Link>
-        <Login />
-      </FlexBox>
+      <PageContent>
+        <FlexBox
+          flexDirection="column"
+          minHeight="100vh"
+          alignItems="center"
+          justifyContent="center"
+          className="mx-2"
+        >
+          <Link href="/">
+            <a>
+              <img src="/assets/images/logo/brand.png" />
+            </a>
+          </Link>
+          <Login />
+        </FlexBox>
+      </PageContent>
+
     </>
   );
 };

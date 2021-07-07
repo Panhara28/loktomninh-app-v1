@@ -13,6 +13,7 @@ import {
 import Grid from "@component/grid/Grid";
 import DashboardLayout from "@component/layout/CustomerDashboardLayout";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
+import PageContent from "@component/PageContent";
 import { SEO } from "@component/Seo";
 import { AuthContext } from "@context/app/Auth";
 import { GET_CUSTOMER_LOGGED, UPDATE_CUSTOMER } from "lib/graph";
@@ -82,23 +83,24 @@ const ProfileEditor = () => {
   return (
     <>
       <SEO />
-      <DashboardPageHeader
-        iconName="user_filled"
-        title="Edit Profile"
-        button={
-          <Link href="/">
-            <Button color="primary" bg="primary.light" px="2rem">
-              Back to Shopping
-            </Button>
-          </Link>
-        }
-      />
+      <PageContent>
+        <DashboardPageHeader
+          iconName="user_filled"
+          title="Edit Profile"
+          button={
+            <Link href="/">
+              <Button color="primary" bg="primary.light" px="2rem">
+                Back to Shopping
+              </Button>
+            </Link>
+          }
+        />
 
-      <Card1>
-        <FlexBox alignItems="flex-end" mb="22px">
-          {/* <Avatar src="/assets/images/faces/ralph.png" size={64} /> */}
+        <Card1>
+          <FlexBox alignItems="flex-end" mb="22px">
+            {/* <Avatar src="/assets/images/faces/ralph.png" size={64} /> */}
 
-          {/* <Box ml="-20px" zIndex={1}>
+            {/* <Box ml="-20px" zIndex={1}>
             <label htmlFor="profile-image">
               <Button
                 as="span"
@@ -113,7 +115,7 @@ const ProfileEditor = () => {
               </Button>
             </label>
           </Box> */}
-          {/* <Hidden>
+            {/* <Hidden>
             <input
               className="hidden"
               onChange={(e) => console.log(e.target.files)}
@@ -122,42 +124,44 @@ const ProfileEditor = () => {
               type="file"
             />
           </Hidden> */}
-        </FlexBox>
+          </FlexBox>
 
-        <Box mb="30px">
-          <Grid container horizontal_spacing={6} vertical_spacing={4}>
-            <Grid item md={12} xs={12}>
-              <PanharaInput
-                defaultValue={data.customerLogged?.nameDisplay}
-                ref={(node) => (nameDisplayInput = node)}
-                autoFocus={true}
-              />
+          <Box mb="30px">
+            <Grid container horizontal_spacing={6} vertical_spacing={4}>
+              <Grid item md={12} xs={12}>
+                <PanharaInput
+                  defaultValue={data.customerLogged?.nameDisplay}
+                  ref={(node) => (nameDisplayInput = node)}
+                  autoFocus={true}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-      </Card1>
-      <Card1 mt="20px">
-        <p>Contact Infomation</p>
-        <ContactContainer>
-          <ContactsForm input={contacts} setInput={setContacts} />
-        </ContactContainer>
-      </Card1>
-      <Card1 mt="20px" mb="50px">
-        <p>Delivery Address</p>
-        <AddressContainer>
-          <DeliveryForm input={locations} setInput={setLocation} />
-        </AddressContainer>
+          </Box>
+        </Card1>
+        <Card1 mt="20px">
+          <p>Contact Infomation</p>
+          <ContactContainer>
+            <ContactsForm input={contacts} setInput={setContacts} />
+          </ContactContainer>
+        </Card1>
+        <Card1 mt="20px" mb="50px">
+          <p>Delivery Address</p>
+          <AddressContainer>
+            <DeliveryForm input={locations} setInput={setLocation} />
+          </AddressContainer>
 
-        <Button
-          mt="20px"
-          type="button"
-          onClick={onUpdate}
-          variant="contained"
-          color="primary"
-        >
-          Save Changes
-        </Button>
-      </Card1>
+          <Button
+            mt="20px"
+            type="button"
+            onClick={onUpdate}
+            variant="contained"
+            color="primary"
+          >
+            Save Changes
+          </Button>
+        </Card1>
+      </PageContent>
+
     </>
   );
 };

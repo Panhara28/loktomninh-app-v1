@@ -9,6 +9,8 @@ import Icon from "@component/icon/Icon";
 import MobileCategoryImageBox from "@component/mobile-category-nav/MobileCategoryImageBox";
 import { MobileCategoryNavStyle } from "@component/mobile-category-nav/MobileCategoryNavStyle";
 import MobileNavigationBar from "@component/mobile-navigation/MobileNavigationBar";
+import PageContent from "@component/PageContent";
+import { SEO } from "@component/Seo";
 import Typography from "@component/Typography";
 import { buildTree } from "functions/getTree";
 import { GET_CATEGORY_LIST } from "lib/graph";
@@ -41,6 +43,7 @@ const MobileCategoryNav = () => {
 
   return (
     <>
+
       <MobileCategoryNavStyle>
         <Header className="header" />
         <div className="main-category-holder">
@@ -119,8 +122,20 @@ const MobileCategoryNav = () => {
         </Box>
         <MobileNavigationBar />
       </MobileCategoryNavStyle>
+
     </>
   );
 };
 
-export default MobileCategoryNav;
+const Category = () => {
+  return (
+    <>
+      <SEO />
+      <PageContent>
+        <MobileCategoryNav />
+      </PageContent>
+    </>
+  )
+}
+
+export default Category;

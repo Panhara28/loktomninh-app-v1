@@ -1,11 +1,19 @@
 import AppLayout from "@component/layout/AppLayout";
+import PageContent from "@component/PageContent";
+import { SEO } from "@component/Seo";
 import { ThankPage } from "@component/thanks/ThankPage";
+import React from "react";
 
 const Thanks = () => {
   return (
-    <main className="thank-container">
-      <ThankPage />
-    </main>
+    <>
+      <SEO />
+      <PageContent>
+        <main className="thank-container">
+          <ThankPage />
+        </main>
+      </PageContent>
+    </>
   );
 };
 
