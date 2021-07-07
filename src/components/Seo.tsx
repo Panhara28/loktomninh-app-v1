@@ -19,7 +19,7 @@ export const SEO: React.FC<SeoProps> = ({
     {image ? (
       <meta property="og:image" content={`${image}`} />
     ) : (
-      <meta property="og:image" content={`${image}`} />
+      <meta property="og:image" content={`https://panhara.sgp1.digitaloceanspaces.com/bb0e906bdfb3fe7057467f3044c7f044f4676dccbfef5e396cb3fe5f0ac7ec1ed46ea2c2.png`} />
     )}
     <meta
       name="description"
