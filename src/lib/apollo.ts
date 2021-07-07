@@ -1,8 +1,13 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import { BatchHttpLink } from "apollo-link-batch-http";
 import { createUploadLink } from "apollo-upload-client";
 
-export const clientRequireToken = (token: string) => {
+export const clientRequireToken = (token?: string) => {
   let uri: string =
     process.env.NEXT_PUBLIC_API_URL || "https://gql-dev.loktomninh.com/?token=";
   console.log(`Pointing end point: ${uri}`);
@@ -36,14 +41,3 @@ export const clientRequireToken = (token: string) => {
     },
   });
 };
-
-// import { ApolloClient, InMemoryCache } from "@apollo/client";
-
-// const uri: string = process.env.NEXT_PUBLIC_API_URL;
-
-// const client = new ApolloClient({
-//   uri: 'http://api.panhara.work/?token=',
-//   cache: new InMemoryCache()
-// });
-
-// export default client;

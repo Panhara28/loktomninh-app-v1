@@ -6,14 +6,10 @@ import ProductIntro from "@component/products/ProductIntro";
 import { H5 } from "@component/Typography";
 import { GET_PRODUCT } from "lib/graph";
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
 import { SEO } from "@component/Seo";
-const ProductDetails = ({ slug }) => {
-  const { data, loading } = useQuery(GET_PRODUCT, {
-    variables: {
-      slug,
-    },
-  });
+import { clientRequireToken } from "lib/apollo";
+
+const ProductDetails = ({ product }) => {
 
   const [selectedOption, setSelectedOption] = useState("description");
 
@@ -21,20 +17,18 @@ const ProductDetails = ({ slug }) => {
     setSelectedOption(opt);
   };
 
-  if (loading || data === undefined) return <div></div>;
-
   return (
     <>
       <SEO
-        title={data.clientProductDetail.product_name}
-        description={data.clientProductDetail.description.replace(
+        title={product.product_name}
+        description={product.description.replace(
           /<[^>]+>/g,
           ""
         )}
-        image={data.clientProductDetail.properties[0].image_url}
-        canonical={`https://loktomninh.com/product/${data.clientProductDetail.slug}`}
+        image={product.properties[0].image_url}
+        canonical={`https://loktomninh.com/product/${product.slug}`}
       />
-      <ProductIntro {...data.clientProductDetail} />
+      <ProductIntro {...product} />
       <div>
         <FlexBox
           borderBottom="1px solid"
@@ -61,7 +55,7 @@ const ProductDetails = ({ slug }) => {
           {selectedOption === "description" && (
             <div className="product-description">
               <ProductDescription
-                description={data.clientProductDetail.description}
+                description={product.description}
               />
             </div>
           )}
@@ -71,10 +65,21 @@ const ProductDetails = ({ slug }) => {
   );
 };
 
-export function getServerSideProps(params) {
-  const slug = params.query;
+export async function getServerSideProps(params) {
+  const { slug } = params.query;
 
-  return { props: slug };
+  const { data } = await clientRequireToken().query({
+    query: GET_PRODUCT,
+    variables: {
+      slug,
+    },
+  })
+
+  return {
+    props: {
+      product: data.clientProductDetail
+    }
+  };
 }
 
 ProductDetails.layout = NavbarLayout;
