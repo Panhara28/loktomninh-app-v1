@@ -130,3 +130,9 @@ $time: 300ms;
     font-size: 14px;
   }
 }
+
+@media (min-width: 375px) {
+  .product_name {
+    font-size: 20px !important;
+  }
+}

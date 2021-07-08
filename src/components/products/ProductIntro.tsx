@@ -38,13 +38,13 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
 
   const [sku, setSku] = useState(
     properties &&
-      properties.map((x) => {
-        const index = items.findIndex((item) => item.id === x.id);
-        return {
-          ...x,
-          qty: Number(items[index]?.quantity || 0),
-        };
-      })
+    properties.map((x) => {
+      const index = items.findIndex((item) => item.id === x.id);
+      return {
+        ...x,
+        qty: Number(items[index]?.quantity || 0),
+      };
+    })
   );
 
   const onChangeImage = (idx, optionIdx, price, image_url) => {
@@ -88,9 +88,9 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
                 items[index].qty === 1
                   ? null
                   : updateItemQuantity(
-                      properties[optionIdx === -1 ? 0 : optionIdx].id,
-                      items[index].qty === 1 ? 0 : items[index].qty
-                    );
+                    properties[optionIdx === -1 ? 0 : optionIdx].id,
+                    items[index].qty === 1 ? 0 : items[index].qty
+                  );
               }}
             >
               <Icon variant="small">minus</Icon>
@@ -130,8 +130,8 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
               <LazyImage
                 src={image}
                 alt={product_name}
-                height="300px"
-                width="auto"
+                height="800px"
+                width="800px"
                 loading="eager"
                 objectFit="contain"
                 priority={true}
@@ -174,7 +174,7 @@ const ProductIntro: React.FC<ProductIntroProps> = ({
         </Grid>
 
         <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb="1rem">{product_name}</H1>
+          <H1 mb="1rem" className="product_name">{product_name}</H1>
 
           <Box mb="24px">
             <H2 color="primary.main" mb="10px" lineHeight="1">
